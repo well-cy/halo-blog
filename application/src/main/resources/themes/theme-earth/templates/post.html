@@ -148,6 +148,62 @@ position: relative;
     z-index: 9999;
     transition: width 0.2s ease;
 }
+
+/* ========== 第二步新增：目录导航固定定位样式 ========== */
+/* 右侧目录整体固定定位样式 */
+.article-toc {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  /* 固定侧边悬浮核心 */
+  position: sticky;
+  top: 20px;
+}
+
+.toc-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.toc-list li {
+  margin: 6px 0;
+}
+
+.toc-list li a {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  display: block;
+  padding: 4px 0;
+}
+
+/* 暗色模式适配 */
+.dark .article-toc {
+  background: #1e293b;
+  border-color: #334155;
+}
+.dark .toc-title {
+  color: #e2e8f0;
+  border-bottom-color: #334155;
+}
+.dark .toc-list li a {
+  color: #94a3b8;
+}
  </style>
 
   <!-- 原来的正文代码 -->
@@ -293,6 +349,8 @@ position: relative;
             th:if="${postCursor.hasNext()}"
             role="navigation"
             class="group inline-flex items-center gap-2 truncate text-sm text-gray-600 hover:text-gray-900 dark:text-slate-100 dark:hover:text-slate-200"
+            th:href="@{${postCursor.next.status.permalink}}"
+            th:title="${postCursor.next.spec.title}"
           >
             <span th:text="${#strings.abbreviate(postCursor.next.spec.title,20)}"></span>
             <span class="i-tabler-chevron-right -translate-x-1 text-lg transition-all group-hover:translate-x-0"></span>
