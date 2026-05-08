@@ -95,3 +95,14 @@ Halo 使用 GPL-v3.0 协议开源，请遵守开源协议。
 ## 状态
 
 ![Repobeats analytics](https://repobeats.axiom.co/api/embed/ad008b2151c22e7cf734d2688befaa795d593b95.svg "Repobeats analytics image")
+
+## 主题文件结构
+- carousel-demo.html：博客首页文件，包含轮播图、文章卡片、侧边栏等所有模块
+- 样式变量：使用民大红色为主色调，统一管理配色
+- 模块说明：
+  - 头部：Logo、副标题、用户头像入口
+  - 轮播图：首页顶部校园活动展示
+  - 主内容区：文章卡片列表
+  - 侧边栏：热门文章排行榜、最新评论模块
+  - 关于我们：项目介绍版块
+  - 页脚：版权、技术栈信息
