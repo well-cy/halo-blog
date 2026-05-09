@@ -1,0 +1,246 @@
+<style>
+/* 评论区整体样式 */
+#comment {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+/* 评论输入框 */
+#comment textarea {
+  border-radius: 8px;
+  border: 1.5px solid #e0e0e0;
+  padding: 12px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+#comment textarea:focus {
+  border-color: #2E8B57;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+}
+
+/* 评论提交按钮 */
+#comment button[type="submit"] {
+  background: #2E8B57;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+#comment button[type="submit"]:hover {
+  background: #236b41;
+}
+
+/* 评论列表每条评论 */
+#comment .comment-item {
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+/* 分享按钮 */
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #2E8B57;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  border: none;
+  margin-top: 1rem;
+}
+.share-btn:hover {
+  background: #236b41;
+}
+
+/* 校园清新绿色主题配色 */
+:root {
+    --primary-color: #2E8B57 !important;
+    --primary-hover: #236b41 !important;
+    --primary-light: #E6F3EC !important;
+    --bg-color: #F5F9F7 !important;
+    --text-color: #333 !important;
+    --card-bg: #ffffff !important;
+    --footer-bg: #2E8B57 !important;
+}
+
+/* 链接、按钮、高亮文字 */
+a, .btn-primary, .button-primary, .highlight {
+    color: #2E8B57 !important;
+}
+.btn-primary, .button-primary {
+    background-color: #2E8B57 !important;
+    border-color: #2E8B57 !important;
+}
+.btn-primary:hover, .button-primary:hover {
+    background-color: #236b41 !important;
+    border-color: #236b41 !important;
+}
+
+/* 导航栏强制清新绿色 */
+header,
+.site-header,
+.header,
+#header,
+.navbar,
+.nav-bar,
+.top-header,
+.site-top,
+.header-wrap,
+.nav-container,
+.main-header {
+    background-color: #2E8B57 !important;
+    border-bottom: none !important;
+}
+
+/* 导航栏文字白色 */
+header a,
+.site-header a,
+.header a,
+#header a,
+.navbar a,
+.nav-bar a,
+.top-header a,
+.header-wrap a,
+.nav-container a,
+.main-header a {
+    color: #ffffff !important;
+}
+
+/* 悬浮写文章按钮 */
+#float-write-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #2E8B57;
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(46, 139, 87, 0.25);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#float-write-btn:hover {
+  transform: scale(1.1);
+  background: #236b41;
+}
+
+/* 顶部公告栏 */
+#top-notice-bar {
+  width: 100%;
+  background: #E6F3EC;
+  color: #2E8B57;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 9998;
+  border-bottom: 1px solid #b5d9c5;
+}
+#close-notice {
+  margin-left: 15px;
+  color: #2E8B57;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* 文章点赞 + 收藏按钮 */
+.post-actions {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+.like-btn, .collect-btn {
+  padding: 10px 18px;
+  border-radius: 30px;
+  border: none;
+  background: #2E8B57;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.like-btn:hover, .collect-btn:hover {
+  background: #236b41;
+  transform: scale(1.05);
+}
+</style>
+
+<button id="float-write-btn" onclick="window.open('/console/#/editor/posts', '_blank')">✏️</button>
+
+<div id="top-notice-bar">
+  📢 校园博客欢迎你！分享学习、生活、趣事都可以投稿～
+  <span id="close-notice" onclick="document.getElementById('top-notice-bar').style.display='none'">×</span>
+</div>
+
+<script>
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(function() {
+    alert('链接已复制！');
+  });
+}
+
+function likePost() {
+  alert("点赞成功！感谢支持～");
+}
+
+function collectPost() {
+  alert("收藏成功！快去个人中心查看吧～");
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const path = window.location.pathname;
+  if (path !== '/' && !path.includes('/category/') && !path.includes('/tag/')) {
+    const actionDiv = document.createElement('div');
+    actionDiv.className = 'post-actions';
+    actionDiv.innerHTML = `
+      <button class="like-btn" onclick="likePost()">❤️ 点赞</button>
+      <button class="collect-btn" onclick="collectPost()">⭐ 收藏</button>
+    `;
+    const commentSection = document.querySelector('#comment');
+    if (commentSection) {
+      commentSection.before(actionDiv);
+    } else {
+      const articleContent = document.querySelector('article, .post, .article');
+      if (articleContent) {
+        articleContent.after(actionDiv);
+      }
+    }
+  }
+
+  // ==============================================
+  // 你要的 Logo、副标题、页脚 我已经加在这里了！
+  // ==============================================
+  // 修改 Logo 文字
+  const logo = document.querySelector('.logo a');
+  if (logo) logo.innerText = "民大校园博客";
+
+  // 修改副标题
+  const subtitle = document.querySelector('.subtitle');
+  if (subtitle) subtitle.innerText = "校园清新风格 | 基于 Halo 博客系统";
+
+  // 修改页脚
+  const footer = document.querySelector('footer');
+  if (footer) footer.innerText = "版权所有 © 2025 民大博客团队";
+});
+</script>
