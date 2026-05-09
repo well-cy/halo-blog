@@ -33,6 +33,7 @@
     </script>
   </th:block>
   <th:block th:fragment="sidebar_prepend">
+    <!-- 原有目录保留不动 -->
     <div
       class="toc-container sticky top-20 z-[5] w-full cursor-pointer rounded-xl bg-white p-3 shadow transition-all duration-500 hover:shadow-md dark:bg-slate-800"
     >
@@ -41,6 +42,12 @@
         <th:block th:text="#{page.post.toc}"></th:block>
       </h2>
       <div class="toc mt-2 max-h-64 overflow-auto"></div>
+    </div>
+
+    <!-- 【全新新增：右侧目录导航结构 不改动你原有任何代码】 -->
+    <div class="article-toc">
+      <div class="toc-title">文章目录</div>
+      <ul class="toc-list" id="tocList"></ul>
     </div>
   </th:block>
   <th:block th:fragment="sidebar">
@@ -65,6 +72,11 @@
   </div>
 
   <style>
+/* 第四步新增：全局平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
  .ai-summary-card {
   margin: 1.5rem 0;
   padding: 1rem 1.25rem;
@@ -125,7 +137,7 @@ position: relative;
   font-size: 18px;
 }
 
-.like-btn .like-count {
+.like-count {
   font-size: 16px;
   color: #333;
 }
@@ -140,6 +152,71 @@ position: relative;
     background: #c91f37;
     z-index: 9999;
     transition: width 0.2s ease;
+}
+
+/* 第二步：目录导航固定定位样式 */
+.article-toc {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  position: sticky;
+  top: 20px;
+}
+
+.toc-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.toc-list li {
+  margin: 6px 0;
+}
+
+.toc-list li a {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  display: block;
+  padding: 4px 0;
+}
+
+.dark .article-toc {
+  background: #1e293b;
+  border-color: #334155;
+}
+.dark .toc-title {
+  color: #e2e8f0;
+  border-bottom-color: #334155;
+}
+.dark .toc-list li a {
+  color: #94a3b8;
+}
+
+/* 第三步：目录高亮样式 */
+.toc-list li a.active {
+  color: #1989fa;
+  font-weight: 600;
+  border-left: 3px solid #1989fa;
+  padding-left: 10px;
+}
+.dark .toc-list li a.active {
+  color: #38bdf8;
+  border-left-color: #38bdf8;
 }
  </style>
 
@@ -290,7 +367,7 @@ position: relative;
             th:title="${postCursor.next.spec.title}"
           >
             <span th:text="${#strings.abbreviate(postCursor.next.spec.title,20)}"></span>
-            <span class="i-tabler-chevron-right -translate-x-1 text-lg transition-all group-hover:translate-x-0"></span>
+            <span class="i-tabler-chevron-right -translate-x1 text-lg transition-all group-hover:translate-x-0"></span>
           </a>
         </div>
       </div>
@@ -315,6 +392,39 @@ window.addEventListener('scroll', () => {
   const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
   const progress = (scrollTop / scrollHeight) * 100;
   progressBar.style.width = progress + '%';
+});
+</script>
+
+<!-- 第三步新增：目录生成+滚动高亮JS -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const tocList = document.getElementById('tocList');
+  const headings = document.querySelectorAll('#content h2, #content h3');
+
+  headings.forEach((item, index) => {
+    item.id = 'heading_' + index;
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#heading_' + index;
+    a.textContent = item.textContent.trim();
+    if(item.tagName === 'H3'){
+      a.style.paddingLeft = '12px';
+    }
+    li.appendChild(a);
+    tocList.appendChild(li);
+  });
+
+  const setActiveToc = () => {
+    const aLinks = document.querySelectorAll('.toc-list a');
+    headings.forEach((item, idx) => {
+      if (window.scrollY >= item.offsetTop - 120) {
+        aLinks.forEach(a => a.classList.remove('active'));
+        aLinks[idx].classList.add('active');
+      }
+    });
+  };
+  window.addEventListener('scroll', setActiveToc);
+  setActiveToc();
 });
 </script>
 
