@@ -189,7 +189,7 @@ header a:hover,
   transform: scale(1.05);
 }
 
-/* ===================== 5号作业：导航栏搜索框 ===================== */
+/* ===================== 5号作业：导航栏搜索框【带聚焦动画】 ===================== */
 .search-box {
   position: relative;
   width: 240px;
@@ -200,17 +200,28 @@ header a:hover,
   width: 100%;
   height: 100%;
   padding: 0 15px 0 35px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 18px;
   outline: none;
   font-size: 14px;
   background: #fff;
   transition: all 0.3s ease;
 }
+
+/* 聚焦动画：边框变色 + 发光阴影 + 轻微放大 */
 .search-input:focus {
   border-color: #c45428;
-  box-shadow: 0 0 0 3px rgba(196,84,40,0.1);
+  box-shadow: 0 0 0 3px rgba(196,84,40,0.15), 
+              0 0 8px rgba(196,84,40,0.25);
+  transform: scale(1.02);
 }
+
+/* 鼠标悬浮浅阴影 */
+.search-input:hover {
+  border-color: #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
 .search-icon {
   position: absolute;
   left: 12px;
@@ -218,17 +229,25 @@ header a:hover,
   transform: translateY(-50%);
   font-size: 14px;
   color: #999;
+  transition: color 0.3s ease;
 }
 
-/* 手机端自动变小 */
+/* 聚焦时图标变主题色 */
+.search-input:focus ~ .search-icon {
+  color: #c45428;
+}
+
+/* 移动端：默认收缩，hover展开 */
 @media (max-width: 768px) {
   .search-box {
     width: 36px;
     overflow: hidden;
+    transition: all 0.3s ease;
   }
   .search-input {
     opacity: 0;
     width: 0;
+    border: none;
   }
   .search-box:hover {
     width: 160px;
@@ -241,13 +260,13 @@ header a:hover,
 }
 </style>
 
-<!-- 5号作业：搜索框 -->
+<!-- 5号作业：搜索框结构 -->
 <div class="search-box">
   <span class="search-icon">🔍</span>
   <input type="text" class="search-input" placeholder="搜索文章...">
 </div>
 
-<!-- ✅ 悬浮写文章按钮（新标签打开，不跳仪表盘） -->
+<!-- 悬浮写文章按钮 -->
 <button id="float-write-btn" onclick="window.open('/console/#/editor/posts', '_blank')">✏️</button>
 
 <!-- 顶部公告栏 -->
@@ -274,10 +293,9 @@ function collectPost() {
   alert("收藏成功！快去个人中心查看吧～");
 }
 
-// ✅ 适配你当前文章结构的渲染逻辑
+// 文章页面自动插入点赞收藏按钮
 document.addEventListener('DOMContentLoaded', function() {
   const path = window.location.pathname;
-  // 匹配所有文章详情页路径
   if (path !== '/' && !path.includes('/category/') && !path.includes('/tag/')) {
     const actionDiv = document.createElement('div');
     actionDiv.className = 'post-actions';
@@ -285,7 +303,6 @@ document.addEventListener('DOMContentLoaded', function() {
       <button class="like-btn" onclick="likePost()">❤️ 点赞</button>
       <button class="collect-btn" onclick="collectPost()">⭐ 收藏</button>
     `;
-    // 适配你当前的文章结构，插入到文章末尾、评论区之前
     const commentSection = document.querySelector('#comment');
     if (commentSection) {
       commentSection.before(actionDiv);
