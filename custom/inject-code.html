@@ -85,16 +85,16 @@ a, .btn-primary, .button-primary, .highlight {
     border-color: #a84722 !important;
 }
 
-/* ====================== 导航栏强制砖红色 ====================== */
-header, 
-.site-header, 
-.header, 
-#header, 
-.navbar, 
-.nav-bar, 
-.top-header, 
-.site-top, 
-.header-wrap, 
+/* 导航栏强制砖红色 */
+header,
+.site-header,
+.header,
+#header,
+.navbar,
+.nav-bar,
+.top-header,
+.site-top,
+.header-wrap,
 .nav-container,
 .main-header {
     background-color: #c45428 !important;
@@ -357,53 +357,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (comment) comment.before(actionDiv);
   }
 
-  // 模拟搜索逻辑（不会跳404）
-  const searchInput = document.getElementById('halo-search-input');
-  const searchModal = document.getElementById('search-modal');
-  const resultsList = document.getElementById('search-results-list');
+  // 砖红色主题的Logo、副标题、页脚（按你原始需求）
+  const logo = document.querySelector('.logo a');
+  if (logo) logo.innerText = "民大校园博客";
 
-  searchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      const keyword = this.value.trim();
-      if (!keyword) {
-        searchModal.style.display = 'none';
-        return;
-      }
+  const subtitle = document.querySelector('.subtitle');
+  if (subtitle) subtitle.innerText = "校园清新风格 | 基于 Halo 博客系统";
 
-      // 过滤匹配的文章
-      const results = mockArticles.filter(article => 
-        article.title.includes(keyword) || article.content.includes(keyword)
-      );
-
-      // 渲染结果并高亮关键词
-      resultsList.innerHTML = '';
-      if (results.length === 0) {
-        resultsList.innerHTML = '<div class="search-result-card"><p>未找到相关文章</p></div>';
-      } else {
-        results.forEach(article => {
-          const highlightedTitle = article.title.replace(new RegExp(keyword, 'g'), `<span class="highlighted">${keyword}</span>`);
-          const highlightedContent = article.content.replace(new RegExp(keyword, 'g'), `<span class="highlighted">${keyword}</span>`);
-          
-          const card = document.createElement('div');
-          card.className = 'search-result-card';
-          card.innerHTML = `
-            <h4>${highlightedTitle}</h4>
-            <p>${highlightedContent}</p>
-          `;
-          resultsList.appendChild(card);
-        });
-      }
-
-      // 显示结果弹窗
-      searchModal.style.display = 'block';
-    }
-  });
-
-  // 点击页面空白处关闭弹窗
-  document.addEventListener('click', function(e) {
-    if (!searchInput.contains(e.target) && !searchModal.contains(e.target)) {
-      searchModal.style.display = 'none';
-    }
-  });
+  const footer = document.querySelector('footer');
+  if (footer) footer.innerText = "版权所有 © 2025 民大博客团队";
 });
 </script>
