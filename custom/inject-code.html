@@ -17,14 +17,14 @@
 }
 
 #comment textarea:focus {
-  border-color: #2E8B57;
+  border-color: #c45428;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+  box-shadow: 0 0 0 3px rgba(196, 84, 40, 0.1);
 }
 
 /* 评论提交按钮 */
 #comment button[type="submit"] {
-  background: #2E8B57;
+  background: #c45428;
   color: white;
   border-radius: 8px;
   padding: 8px 20px;
@@ -35,7 +35,7 @@
 }
 
 #comment button[type="submit"]:hover {
-  background: #236b41;
+  background: #a84722;
 }
 
 /* 评论列表每条评论 */
@@ -52,7 +52,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #2E8B57;
+  background: #c45428;
   color: white;
   padding: 6px 16px;
   border-radius: 20px;
@@ -62,46 +62,42 @@
   margin-top: 1rem;
 }
 .share-btn:hover {
-  background: #236b41;
+  background: #a84722;
 }
 
-/* 校园清新绿色主题配色 */
+/* 砖红色校园主题配色 */
 :root {
-    --primary-color: #2E8B57 !important;
-    --primary-hover: #236b41 !important;
-    --primary-light: #E6F3EC !important;
-    --bg-color: #F5F9F7 !important;
-    --text-color: #333 !important;
-    --card-bg: #ffffff !important;
-    --footer-bg: #2E8B57 !important;
+    --primary-color: #c45428 !important;
+    --primary-hover: #a84722 !important;
+    --primary-light: #fceee6 !important;
 }
 
 /* 链接、按钮、高亮文字 */
 a, .btn-primary, .button-primary, .highlight {
-    color: #2E8B57 !important;
+    color: #c45428 !important;
 }
 .btn-primary, .button-primary {
-    background-color: #2E8B57 !important;
-    border-color: #2E8B57 !important;
+    background-color: #c45428 !important;
+    border-color: #c45428 !important;
 }
 .btn-primary:hover, .button-primary:hover {
-    background-color: #236b41 !important;
-    border-color: #236b41 !important;
+    background-color: #a84722 !important;
+    border-color: #a84722 !important;
 }
 
-/* 导航栏强制清新绿色 */
-header,
-.site-header,
-.header,
-#header,
-.navbar,
-.nav-bar,
-.top-header,
-.site-top,
-.header-wrap,
+/* ====================== 导航栏强制砖红色 ====================== */
+header, 
+.site-header, 
+.header, 
+#header, 
+.navbar, 
+.nav-bar, 
+.top-header, 
+.site-top, 
+.header-wrap, 
 .nav-container,
 .main-header {
-    background-color: #2E8B57 !important;
+    background-color: #c45428 !important;
     border-bottom: none !important;
 }
 
@@ -119,7 +115,14 @@ header a,
     color: #ffffff !important;
 }
 
-/* 悬浮写文章按钮 */
+/* 导航栏hover效果 */
+header a:hover,
+.site-header a:hover,
+.navbar a:hover {
+    color: #fceee6 !important;
+}
+
+/* ====================== 悬浮写文章按钮 ====================== */
 #float-write-btn {
   position: fixed;
   right: 30px;
@@ -127,12 +130,12 @@ header a,
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #2E8B57;
+  background: #c45428;
   color: white;
   border: none;
   font-size: 24px;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(46, 139, 87, 0.25);
+  box-shadow: 0 4px 15px rgba(196, 84, 40, 0.25);
   transition: all 0.3s ease;
   z-index: 9999;
   display: flex;
@@ -141,30 +144,30 @@ header a,
 }
 #float-write-btn:hover {
   transform: scale(1.1);
-  background: #236b41;
+  background: #a84722;
 }
 
-/* 顶部公告栏 */
+/* ====================== 顶部公告栏 ====================== */
 #top-notice-bar {
   width: 100%;
-  background: #E6F3EC;
-  color: #2E8B57;
+  background: #fceee6;
+  color: #c45428;
   text-align: center;
   padding: 10px 0;
   font-size: 14px;
   position: sticky;
   top: 0;
   z-index: 9998;
-  border-bottom: 1px solid #b5d9c5;
+  border-bottom: 1px solid #f0c8b4;
 }
 #close-notice {
   margin-left: 15px;
-  color: #2E8B57;
+  color: #c45428;
   cursor: pointer;
   font-weight: bold;
 }
 
-/* 文章点赞 + 收藏按钮 */
+/* ====================== 文章点赞 + 收藏按钮 ====================== */
 .post-actions {
   display: flex;
   gap: 12px;
@@ -174,40 +177,173 @@ header a,
   padding: 10px 18px;
   border-radius: 30px;
   border: none;
-  background: #2E8B57;
+  background: #c45428;
   color: #fff;
   font-size: 14px;
   cursor: pointer;
   transition: 0.3s;
 }
 .like-btn:hover, .collect-btn:hover {
-  background: #236b41;
+  background: #a84722;
   transform: scale(1.05);
+}
+
+/* ===================== 5号作业：搜索框 导航栏右侧原版不变 ===================== */
+.search-box {
+  position: fixed;
+  top: 12px;
+  right: 20px;
+  z-index: 9999;
+  width: 240px;
+  height: 36px;
+}
+.search-input {
+  width: 100%;
+  height: 100%;
+  padding: 0 15px 0 35px;
+  border: 1px solid #ddd;
+  border-radius: 18px;
+  outline: none;
+  font-size: 14px;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+.search-input:focus {
+  border-color: #c45428;
+  box-shadow: 0 0 0 3px rgba(196,84,40,0.15), 0 0 8px rgba(196,84,40,0.25);
+  transform: scale(1.02);
+}
+.search-input:hover {
+  border-color: #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #999;
+  transition: color 0.3s ease;
+}
+.search-input:focus ~ .search-icon {
+  color: #c45428;
+}
+@media (max-width: 768px) {
+  .search-box {
+    width: 36px;
+    overflow: hidden;
+  }
+  .search-box:hover { width: 160px; }
+  .search-input { opacity: 0; width: 0; border: none; }
+  .search-box:hover .search-input { opacity: 1; width: 100%; }
+}
+
+/* ===================== 6号作业：全文搜索 模拟效果 ===================== */
+/* 搜索结果关键词高亮 */
+.highlighted, .search-highlight {
+    background-color: #fff3a0 !important;
+    color: #c45428 !important;
+    font-weight: bold !important;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+/* 搜索结果卡片样式优化 */
+.article-item, .post-card, .search-result-item {
+    transition: all 0.3s ease !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+.article-item:hover, .post-card:hover, .search-result-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+/* 搜索结果页面标题主题色 */
+.search-result-title {
+    color: #c45428 !important;
+    font-weight: bold !important;
+}
+
+/* 模拟搜索结果弹窗（不会404） */
+#search-modal {
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 300px;
+  max-height: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  z-index: 9999;
+  overflow-y: auto;
+}
+#search-modal h3 {
+  padding: 12px;
+  margin: 0;
+  background: #fceee6;
+  color: #c45428;
+  border-radius: 12px 12px 0 0;
+}
+.search-result-card {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+.search-result-card:last-child {
+  border-bottom: none;
+}
+.search-result-card h4 {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+.search-result-card p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
 }
 </style>
 
+<!-- 5号作业：搜索框 导航栏右侧 -->
+<div class="search-box">
+  <span class="search-icon">🔍</span>
+  <input type="text" class="search-input" id="halo-search-input" placeholder="搜索文章...">
+</div>
+
+<!-- 6号作业：模拟搜索结果弹窗 -->
+<div id="search-modal">
+  <h3>📑 搜索结果</h3>
+  <div id="search-results-list"></div>
+</div>
+
+<!-- 悬浮写文章按钮 -->
 <button id="float-write-btn" onclick="window.open('/console/#/editor/posts', '_blank')">✏️</button>
 
+<!-- 顶部公告栏 -->
 <div id="top-notice-bar">
   📢 校园博客欢迎你！分享学习、生活、趣事都可以投稿～
   <span id="close-notice" onclick="document.getElementById('top-notice-bar').style.display='none'">×</span>
 </div>
 
 <script>
+// 复制分享链接
 function copyLink() {
-  navigator.clipboard.writeText(window.location.href).then(function() {
-    alert('链接已复制！');
-  });
+  navigator.clipboard.writeText(window.location.href).then(() => alert("链接已复制！"));
 }
 
-function likePost() {
-  alert("点赞成功！感谢支持～");
-}
+// 点赞功能
+function likePost() { alert("点赞成功！感谢支持～"); }
 
-function collectPost() {
-  alert("收藏成功！快去个人中心查看吧～");
-}
+// 收藏功能
+function collectPost() { alert("收藏成功！可在个人中心查看～"); }
 
+// 模拟文章数据（用于本地搜索）
+const mockArticles = [
+  { title: "运动会精彩瞬间回顾", content: "本次运动会有短跑、跳远、接力赛等项目，同学们表现出色。" },
+  { title: "校园篮球赛决赛", content: "校队在决赛中以2分险胜，夺得冠军。" },
+  { title: "期末复习指南", content: "各科复习重点和时间规划建议，助你高效备考。" }
+];
+
+// 文章页面自动插入点赞收藏按钮
 document.addEventListener('DOMContentLoaded', function() {
   const path = window.location.pathname;
   if (path !== '/' && !path.includes('/category/') && !path.includes('/tag/')) {
@@ -217,30 +353,57 @@ document.addEventListener('DOMContentLoaded', function() {
       <button class="like-btn" onclick="likePost()">❤️ 点赞</button>
       <button class="collect-btn" onclick="collectPost()">⭐ 收藏</button>
     `;
-    const commentSection = document.querySelector('#comment');
-    if (commentSection) {
-      commentSection.before(actionDiv);
-    } else {
-      const articleContent = document.querySelector('article, .post, .article');
-      if (articleContent) {
-        articleContent.after(actionDiv);
-      }
-    }
+    const comment = document.querySelector('#comment');
+    if (comment) comment.before(actionDiv);
   }
 
-  // ==============================================
-  // 你要的 Logo、副标题、页脚 我已经加在这里了！
-  // ==============================================
-  // 修改 Logo 文字
-  const logo = document.querySelector('.logo a');
-  if (logo) logo.innerText = "民大校园博客";
+  // 模拟搜索逻辑（不会跳404）
+  const searchInput = document.getElementById('halo-search-input');
+  const searchModal = document.getElementById('search-modal');
+  const resultsList = document.getElementById('search-results-list');
 
-  // 修改副标题
-  const subtitle = document.querySelector('.subtitle');
-  if (subtitle) subtitle.innerText = "校园清新风格 | 基于 Halo 博客系统";
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const keyword = this.value.trim();
+      if (!keyword) {
+        searchModal.style.display = 'none';
+        return;
+      }
 
-  // 修改页脚
-  const footer = document.querySelector('footer');
-  if (footer) footer.innerText = "版权所有 © 2025 民大博客团队";
+      // 过滤匹配的文章
+      const results = mockArticles.filter(article => 
+        article.title.includes(keyword) || article.content.includes(keyword)
+      );
+
+      // 渲染结果并高亮关键词
+      resultsList.innerHTML = '';
+      if (results.length === 0) {
+        resultsList.innerHTML = '<div class="search-result-card"><p>未找到相关文章</p></div>';
+      } else {
+        results.forEach(article => {
+          const highlightedTitle = article.title.replace(new RegExp(keyword, 'g'), `<span class="highlighted">${keyword}</span>`);
+          const highlightedContent = article.content.replace(new RegExp(keyword, 'g'), `<span class="highlighted">${keyword}</span>`);
+          
+          const card = document.createElement('div');
+          card.className = 'search-result-card';
+          card.innerHTML = `
+            <h4>${highlightedTitle}</h4>
+            <p>${highlightedContent}</p>
+          `;
+          resultsList.appendChild(card);
+        });
+      }
+
+      // 显示结果弹窗
+      searchModal.style.display = 'block';
+    }
+  });
+
+  // 点击页面空白处关闭弹窗
+  document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !searchModal.contains(e.target)) {
+      searchModal.style.display = 'none';
+    }
+  });
 });
 </script>
