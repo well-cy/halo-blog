@@ -122,6 +122,27 @@ header a:hover,
     color: #fceee6 !important;
 }
 
+/* ====================== 今日新任务：导航栏右侧用户头像 ====================== */
+.user-avatar {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #fff;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 9999;
+}
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ====================== 悬浮写文章按钮 ====================== */
 #float-write-btn {
   position: fixed;
@@ -301,7 +322,34 @@ header a:hover,
   font-size: 12px;
   color: #666;
 }
+
+/* ====================== 今日新任务：关于我们版块 ====================== */
+.about-section {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.about-section h2 {
+  color: #c45428;
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-left: 12px;
+  border-left: 5px solid #c45428;
+}
+.about-section p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #444;
+}
 </style>
+
+<!-- 导航栏右侧：用户头像 -->
+<div class="user-avatar" onclick="window.open('/console','_blank')">
+  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=student" alt="用户头像">
+</div>
 
 <!-- 5号作业：搜索框 导航栏右侧 -->
 <div class="search-box">
@@ -322,6 +370,12 @@ header a:hover,
 <div id="top-notice-bar">
   📢 校园博客欢迎你！分享学习、生活、趣事都可以投稿～
   <span id="close-notice" onclick="document.getElementById('top-notice-bar').style.display='none'">×</span>
+</div>
+
+<!-- 今日新任务：首页关于我们版块 -->
+<div class="about-section">
+  <h2>关于我们</h2>
+  <p>民大校园博客是一个专注于校园生活、学习分享、活动记录的开放式平台。我们致力于打造温暖、真实、有价值的校园内容社区，让每一位同学都能在这里记录成长、分享热爱、收获共鸣。</p>
 </div>
 
 <script>
@@ -357,14 +411,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (comment) comment.before(actionDiv);
   }
 
-  // 砖红色主题的Logo、副标题、页脚（按你原始需求）
+  // ====================== 今日新任务：修改副标题 + 页脚 ======================
   const logo = document.querySelector('.logo a');
   if (logo) logo.innerText = "民大校园博客";
 
   const subtitle = document.querySelector('.subtitle');
-  if (subtitle) subtitle.innerText = "校园清新风格 | 基于 Halo 博客系统";
+  if (subtitle) subtitle.innerText = "记录校园生活 · 分享青春故事 · 凝聚民大力量";
 
   const footer = document.querySelector('footer');
-  if (footer) footer.innerText = "版权所有 © 2025 民大博客团队";
+  if (footer) footer.innerText = "© 2026 民大校园博客 | 砖红色校园主题 · 用心打造每一处细节";
 });
 </script>
