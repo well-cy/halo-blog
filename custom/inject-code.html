@@ -17,14 +17,14 @@
 }
 
 #comment textarea:focus {
-  border-color: #2E8B57;
+  border-color: #c45428;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+  box-shadow: 0 0 0 3px rgba(196, 84, 40, 0.1);
 }
 
 /* 评论提交按钮 */
 #comment button[type="submit"] {
-  background: #2E8B57;
+  background: #c45428;
   color: white;
   border-radius: 8px;
   padding: 8px 20px;
@@ -35,7 +35,7 @@
 }
 
 #comment button[type="submit"]:hover {
-  background: #236b41;
+  background: #a84722;
 }
 
 /* 评论列表每条评论 */
@@ -52,7 +52,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #2E8B57;
+  background: #c45428;
   color: white;
   padding: 6px 16px;
   border-radius: 20px;
@@ -62,34 +62,30 @@
   margin-top: 1rem;
 }
 .share-btn:hover {
-  background: #236b41;
+  background: #a84722;
 }
 
-/* 校园清新绿色主题配色 */
+/* 砖红色校园主题配色 */
 :root {
-    --primary-color: #2E8B57 !important;
-    --primary-hover: #236b41 !important;
-    --primary-light: #E6F3EC !important;
-    --bg-color: #F5F9F7 !important;
-    --text-color: #333 !important;
-    --card-bg: #ffffff !important;
-    --footer-bg: #2E8B57 !important;
+    --primary-color: #c45428 !important;
+    --primary-hover: #a84722 !important;
+    --primary-light: #fceee6 !important;
 }
 
 /* 链接、按钮、高亮文字 */
 a, .btn-primary, .button-primary, .highlight {
-    color: #2E8B57 !important;
+    color: #c45428 !important;
 }
 .btn-primary, .button-primary {
-    background-color: #2E8B57 !important;
-    border-color: #2E8B57 !important;
+    background-color: #c45428 !important;
+    border-color: #c45428 !important;
 }
 .btn-primary:hover, .button-primary:hover {
-    background-color: #236b41 !important;
-    border-color: #236b41 !important;
+    background-color: #a84722 !important;
+    border-color: #a84722 !important;
 }
 
-/* 导航栏强制清新绿色 */
+/* 导航栏强制砖红色 */
 header,
 .site-header,
 .header,
@@ -101,7 +97,7 @@ header,
 .header-wrap,
 .nav-container,
 .main-header {
-    background-color: #2E8B57 !important;
+    background-color: #c45428 !important;
     border-bottom: none !important;
 }
 
@@ -127,12 +123,12 @@ header a,
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #2E8B57;
+  background: #c45428;
   color: white;
   border: none;
   font-size: 24px;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(46, 139, 87, 0.25);
+  box-shadow: 0 4px 15px rgba(196, 84, 40, 0.25);
   transition: all 0.3s ease;
   z-index: 9999;
   display: flex;
@@ -141,25 +137,25 @@ header a,
 }
 #float-write-btn:hover {
   transform: scale(1.1);
-  background: #236b41;
+  background: #a84722;
 }
 
 /* 顶部公告栏 */
 #top-notice-bar {
   width: 100%;
-  background: #E6F3EC;
-  color: #2E8B57;
+  background: #fceee6;
+  color: #c45428;
   text-align: center;
   padding: 10px 0;
   font-size: 14px;
   position: sticky;
   top: 0;
   z-index: 9998;
-  border-bottom: 1px solid #b5d9c5;
+  border-bottom: 1px solid #f0c8b4;
 }
 #close-notice {
   margin-left: 15px;
-  color: #2E8B57;
+  color: #c45428;
   cursor: pointer;
   font-weight: bold;
 }
@@ -174,14 +170,14 @@ header a,
   padding: 10px 18px;
   border-radius: 30px;
   border: none;
-  background: #2E8B57;
+  background: #c45428;
   color: #fff;
   font-size: 14px;
   cursor: pointer;
   transition: 0.3s;
 }
 .like-btn:hover, .collect-btn:hover {
-  background: #236b41;
+  background: #a84722;
   transform: scale(1.05);
 }
 </style>
@@ -228,18 +224,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // ==============================================
-  // 你要的 Logo、副标题、页脚 我已经加在这里了！
-  // ==============================================
-  // 修改 Logo 文字
+  // 砖红色主题的Logo、副标题、页脚（按你原始需求）
   const logo = document.querySelector('.logo a');
   if (logo) logo.innerText = "民大校园博客";
 
-  // 修改副标题
   const subtitle = document.querySelector('.subtitle');
   if (subtitle) subtitle.innerText = "校园清新风格 | 基于 Halo 博客系统";
 
-  // 修改页脚
   const footer = document.querySelector('footer');
   if (footer) footer.innerText = "版权所有 © 2025 民大博客团队";
 });
