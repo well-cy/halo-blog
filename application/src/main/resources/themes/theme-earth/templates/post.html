@@ -1,21 +1,11 @@
-<!doctype html>
 <div class="read-progress-bar"></div>
+<!doctype html>
 <html
   xmlns:th="https://www.thymeleaf.org"
   th:replace="~{modules/layout :: html(title = ${post.spec.title} + ' - ' + ${site.title}, hero = ~{::hero}, content = ~{::content}, head = ~{::head}, footer = ~{::footer}, sidebar = ~{::sidebar}, contentClass = ${theme.config.layout.content_header} and ${not #strings.isEmpty(post.spec.cover)} ? '!-mt-20' : '')}"
 >
   <th:block th:fragment="head">
     <link
-.read-progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 3px;
-    background: #409eff;
-    z-index: 9999;
-    transition: width 0.2s ease;
-}
       th:if="${theme.config.post.content_style == 'github'}"
       rel="stylesheet"
       th:href="@{/assets/styles/github-markdown.css?v={version}(version=${theme.spec.version})}"
@@ -43,6 +33,7 @@
     </script>
   </th:block>
   <th:block th:fragment="sidebar_prepend">
+    <!-- 原有目录保留不动 -->
     <div
       class="toc-container sticky top-20 z-[5] w-full cursor-pointer rounded-xl bg-white p-3 shadow transition-all duration-500 hover:shadow-md dark:bg-slate-800"
     >
@@ -51,6 +42,12 @@
         <th:block th:text="#{page.post.toc}"></th:block>
       </h2>
       <div class="toc mt-2 max-h-64 overflow-auto"></div>
+    </div>
+
+    <!-- 【全新新增：右侧目录导航结构 不改动你原有任何代码】 -->
+    <div class="article-toc">
+      <div class="toc-title">文章目录</div>
+      <ul class="toc-list" id="tocList"></ul>
     </div>
   </th:block>
   <th:block th:fragment="sidebar">
@@ -75,14 +72,18 @@
   </div>
 
   <style>
+/* 第四步新增：全局平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
  .ai-summary-card {
   margin: 1.5rem 0;
   padding: 1rem 1.25rem;
   border-radius: 8px;
-  /* 原来的 background-color 删掉，换成下面的渐变 */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff; /* 文字改成白色，适配深色渐变背景 */
-  border: none; /* 原来的 border 可以去掉 */
+  color: #fff;
+  border: none;
 position: relative;
 }
   .ai-summary-header {
@@ -95,20 +96,19 @@ position: relative;
   }
   .ai-icon { font-size: 1.1rem; }
   .ai-summary-content p { margin: 0; color: #374151; line-height: 1.6; }
-/* 左侧加粗竖线 */
 .ai-summary-card::before {
   content: '';
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 4px; /* 控制粗细，4px就是加粗了 */
-  background: rgba(255,255,255,0.5); /* 半透明白色，适配你的渐变背景 */
+  width: 4px;
+  background: rgba(255,255,255,0.5);
   border-radius: 2px 0 0 2px;
 }
 .ai-summary-card p {
-  font-size: 15px; /* 调整字号 */
-  line-height: 1.6; /* 调整行高 */
+  font-size: 15px;
+  line-height: 1.6;
   font-weight: 400;
 } 
 .like-button-container {
@@ -137,15 +137,91 @@ position: relative;
   font-size: 18px;
 }
 
-.like-btn .like-count {
+.like-count {
   font-size: 16px;
   color: #333;
+}
+
+/* 阅读进度条样式 民大红 */
+.read-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: #c91f37;
+    z-index: 9999;
+    transition: width 0.2s ease;
+}
+
+/* 第二步：目录导航固定定位样式 */
+.article-toc {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  position: sticky;
+  top: 20px;
+}
+
+.toc-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.toc-list li {
+  margin: 6px 0;
+}
+
+.toc-list li a {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  display: block;
+  padding: 4px 0;
+}
+
+.dark .article-toc {
+  background: #1e293b;
+  border-color: #334155;
+}
+.dark .toc-title {
+  color: #e2e8f0;
+  border-bottom-color: #334155;
+}
+.dark .toc-list li a {
+  color: #94a3b8;
+}
+
+/* 第三步：目录高亮样式 */
+.toc-list li a.active {
+  color: #1989fa;
+  font-weight: 600;
+  border-left: 3px solid #1989fa;
+  padding-left: 10px;
+}
+.dark .toc-list li a.active {
+  color: #38bdf8;
+  border-left-color: #38bdf8;
 }
  </style>
 
   <!-- 原来的正文代码 -->
   <div x-data="upvote('post','content.halo.run','posts')" class="...">
-    ...
   </div>
 </th:block>
     <div x-data="upvote('post','content.halo.run','posts')" class="rounded-xl bg-white p-4 dark:bg-slate-800">
@@ -291,7 +367,7 @@ position: relative;
             th:title="${postCursor.next.spec.title}"
           >
             <span th:text="${#strings.abbreviate(postCursor.next.spec.title,20)}"></span>
-            <span class="i-tabler-chevron-right -translate-x-1 text-lg transition-all group-hover:translate-x-0"></span>
+            <span class="i-tabler-chevron-right -translate-x1 text-lg transition-all group-hover:translate-x-0"></span>
           </a>
         </div>
       </div>
@@ -307,7 +383,9 @@ position: relative;
   </button>
 </div>
     </div>
-  </th:block>
+
+<!-- 阅读进度条JS 正确位置：body结束标签上方 -->
+<script>
 const progressBar = document.querySelector('.read-progress-bar');
 window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY;
@@ -315,4 +393,40 @@ window.addEventListener('scroll', () => {
   const progress = (scrollTop / scrollHeight) * 100;
   progressBar.style.width = progress + '%';
 });
+</script>
+
+<!-- 第三步新增：目录生成+滚动高亮JS -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const tocList = document.getElementById('tocList');
+  const headings = document.querySelectorAll('#content h2, #content h3');
+
+  headings.forEach((item, index) => {
+    item.id = 'heading_' + index;
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#heading_' + index;
+    a.textContent = item.textContent.trim();
+    if(item.tagName === 'H3'){
+      a.style.paddingLeft = '12px';
+    }
+    li.appendChild(a);
+    tocList.appendChild(li);
+  });
+
+  const setActiveToc = () => {
+    const aLinks = document.querySelectorAll('.toc-list a');
+    headings.forEach((item, idx) => {
+      if (window.scrollY >= item.offsetTop - 120) {
+        aLinks.forEach(a => a.classList.remove('active'));
+        aLinks[idx].classList.add('active');
+      }
+    });
+  };
+  window.addEventListener('scroll', setActiveToc);
+  setActiveToc();
+});
+</script>
+
+</body>
 </html>
