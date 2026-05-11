@@ -750,6 +750,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (comment) comment.before(actionDiv);
   }
 
+
   const likeButton = document.getElementById('likeButton');
   if (likeButton) {
     const likeCount = document.getElementById('likeCount');
@@ -821,5 +822,16 @@ document.addEventListener('DOMContentLoaded', function() {
       else i.classList.remove('active');
     });
   });
+
+  // 砖红色主题的Logo、副标题、页脚（按你原始需求）
+  const logo = document.querySelector('.logo a');
+  if (logo) logo.innerText = "民大校园博客";
+
+  const subtitle = document.querySelector('.subtitle');
+  if (subtitle) subtitle.innerText = "校园清新风格 | 基于 Halo 博客系统";
+
+  const footer = document.querySelector('footer');
+  if (footer) footer.innerText = "版权所有 © 2025 民大博客团队";
+
 });
 </script>
