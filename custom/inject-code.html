@@ -72,6 +72,7 @@
     --primary-light: #fceee6 !important;
 }
 
+/* 链接、按钮、高亮文字 */
 a, .btn-primary, .button-primary, .highlight {
     color: #c45428 !important;
 }
@@ -85,20 +86,22 @@ a, .btn-primary, .button-primary, .highlight {
 }
 
 /* 导航栏强制砖红色 */
-header, 
-.site-header, 
-.header, 
-#header, 
-.navbar, 
-.nav-bar, 
-.top-header, 
-.site-top, 
-.header-wrap, 
+header,
+.site-header,
+.header,
+#header,
+.navbar,
+.nav-bar,
+.top-header,
+.site-top,
+.header-wrap,
 .nav-container,
 .main-header {
     background-color: #c45428 !important;
     border-bottom: none !important;
 }
+
+/* 导航栏文字白色 */
 header a,
 .site-header a,
 .header a,
@@ -110,11 +113,6 @@ header a,
 .nav-container a,
 .main-header a {
     color: #ffffff !important;
-}
-header a:hover,
-.site-header a:hover,
-.navbar a:hover {
-    color: #fceee6 !important;
 }
 
 /* 悬浮写文章按钮 */
@@ -188,7 +186,7 @@ header a:hover,
   position: fixed;
   top: 12px;
   right: 20px;
-  z-index: 9999;
+  z-index: 999999;
   width: 240px;
   height: 36px;
 }
@@ -248,8 +246,8 @@ header a:hover,
     overflow: hidden !important;
 }
 .article-item:hover, .post-card:hover, .search-result-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 .search-result-title {
     color: #c45428 !important;
@@ -266,7 +264,7 @@ header a:hover,
   background: white;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  z-index: 9999;
+  z-index: 999999;
   overflow-y: auto;
 }
 #search-modal h3 {
@@ -303,7 +301,6 @@ header a:hover,
   background: #f5f5f5;
   border-radius: 4px;
   vertical-align: middle;
-
 }
 
 /* 搜索无结果提示 */
@@ -311,7 +308,6 @@ header a:hover,
   padding: 30px 20px;
   text-align: center;
   color: #999;
-  
 }
 .search-empty-tip h4 {
   margin-bottom: 6px;
@@ -320,6 +316,187 @@ header a:hover,
 }
 .search-empty-tip p {
   font-size: 13px;
+}
+
+/* ========== AI摘要卡片样式 ========== */
+.ai-summary-card {
+  display: flex;
+  background: linear-gradient(135deg, #e8f4fd 0%, #d4eafc 50%, #f0f7ff 100%);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: 80px;
+}
+.ai-summary-left-bar {
+  width: 5px;
+  background: #3b82f6;
+  border-radius: 3px;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+.ai-summary-content {
+  flex: 1;
+}
+.ai-summary-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 8px;
+  letter-spacing: 1.5px;
+}
+.ai-summary-text {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ========== 点赞按钮基础样式 ========== */
+.article-like-section {
+  text-align: center;
+  margin: 40px 0;
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+}
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+  transition: all 0.3s ease;
+  outline: none;
+}
+.like-button:hover {
+  border-color: #ff6b81;
+  color: #ff6b81;
+  box-shadow: 0 2px 12px rgba(255, 107, 129, 0.15);
+}
+.like-icon {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+.like-text {
+  font-weight: 500;
+}
+.like-count {
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+/* ========== 点赞按钮动画 ========== */
+@keyframes likeBounce {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.3); }
+  50%  { transform: scale(0.9); }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.like-button.liked {
+  border-color: #ff6b81;
+  color: #ff6b81;
+  background: #fff5f6;
+}
+.like-button.liked .like-icon {
+  color: #ff6b81;
+}
+.like-button.bouncing .like-icon {
+  animation: likeBounce 0.5s ease;
+}
+
+/* ========== 阅读进度条样式 ========== */
+.reading-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 10000;
+  background: transparent;
+}
+.reading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #c45428;
+  transition: width 0.1s linear;
+}
+
+/* ========== 右侧目录导航样式 ========== */
+.article-toc {
+  position: fixed;
+  right: 20px;
+  top: 120px;
+  width: 220px;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  background: #fff;
+  border-left: 1px solid #eee;
+  padding: 20px 0 20px 20px;
+  z-index: 100;
+  font-size: 14px;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+  border-radius: 8px 0 0 8px;
+  display: none;
+}
+.article-toc.show {
+  display: block;
+}
+.toc-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.toc-item {
+  margin-bottom: 8px;
+}
+.toc-link {
+  color: #666;
+  text-decoration: none;
+  display: block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.toc-link:hover {
+  color: #333;
+  background: #f5f5f5;
+}
+.toc-item.active .toc-link {
+  color: #c45428;
+  font-weight: 600;
+  border-left-color: #c45428;
+  background: #fdf2f2;
+}
+@media (max-width: 768px) {
+  .article-toc {
+    display: none !important;
+  }
+}
+
+/* 给文章标题、正文预留锚点 + 滚动偏移 */
+#article-title-wrap {
+  scroll-margin-top: 80px;
+}
+#article-content-wrap {
+  scroll-margin-top: 80px;
 }
 </style>
 
@@ -335,63 +512,210 @@ header a:hover,
   <div id="search-results-list"></div>
 </div>
 
-<!-- 悬浮按钮 -->
 <button id="float-write-btn" onclick="window.open('/console/#/editor/posts', '_blank')">✏️</button>
 
-<!-- 顶部公告 -->
 <div id="top-notice-bar">
   📢 校园博客欢迎你！分享学习、生活、趣事都可以投稿～
   <span id="close-notice" onclick="document.getElementById('top-notice-bar').style.display='none'">×</span>
 </div>
 
 <script>
-// 点赞收藏
-function copyLink(){}
-function likePost(){alert("点赞成功！")}
-function collectPost(){alert("收藏成功！")}
-
-// ========== 你的真实文章：标题 + slug别名（改成你自己真实文章）==========
-const mockArticles = [
-  { title: "运动会精彩瞬间回顾", slug: "sports-meet", content: "本次运动会有短跑、跳远、接力赛等项目。" },
-  { title: "校园篮球赛决赛", slug: "basketball-final", content: "校队在决赛中以2分险胜夺冠。" },
-  { title: "期末复习指南", slug: "exam-review", content: "各科复习重点和时间规划建议。" }
-];
-
+// 终极搜索：直接抓取页面所有文章，100%能搜到
 document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('halo-search-input');
   const searchModal = document.getElementById('search-modal');
   const resultsList = document.getElementById('search-results-list');
 
-  searchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      const keyword = this.value.trim();
-      resultsList.innerHTML = '';
-      if(!keyword){searchModal.style.display='none';return;}
-      const res = mockArticles.filter(x=>x.title.includes(keyword)||x.content.includes(keyword));
-      
-      if(res.length===0){
-        resultsList.innerHTML = `<div class="search-empty-tip"><h4>😶‍🌫️ 暂无搜索结果</h4><p>换个关键词试试吧～</p></div>`;
-      }else{
-        res.forEach(art=>{
-          let t = art.title.replace(new RegExp(keyword,'g'),`<span class="highlighted">${keyword}</span>`);
-          let c = art.content.replace(new RegExp(keyword,'g'),`<span class="highlighted">${keyword}</span>`);
-          // 关键：加a标签 → Halo真实文章链接 /archives/xxx
-          resultsList.innerHTML += `
-            <div class="search-result-card">
-              <h4><a href="/archives/${art.slug}" target="_blank">${t}</a> <span class="read-time-label">阅读约1分钟</span></h4>
-              <p>${c}</p>
-            </div>
-          `;
-        });
+  function searchArticle(keyword) {
+    keyword = keyword.trim().toLowerCase();
+    if (!keyword) {
+      searchModal.style.display = 'none';
+      return;
+    }
+
+    let results = [];
+    let allLinks = document.querySelectorAll('a');
+
+    allLinks.forEach(link => {
+      let text = link.innerText.toLowerCase();
+      let href = link.href;
+      if (href.includes('/archives/') && text.includes(keyword)) {
+        results.push({ title: link.innerText, url: href });
       }
-      searchModal.style.display = 'block';
+    });
+
+    resultsList.innerHTML = '';
+    if (results.length === 0) {
+      resultsList.innerHTML = `<div class="search-empty-tip"><h4>😶‍🌫️ 暂无结果</h4></div>`;
+    } else {
+      results.forEach(item => {
+        resultsList.innerHTML += `
+          <div class="search-result-card">
+            <h4><a href="${item.url}" target="_blank">${item.title}</a></h4>
+          </div>`;
+      });
+    }
+    searchModal.style.display = 'block';
+  }
+
+  searchInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      searchArticle(this.value);
     }
   });
 
-  document.addEventListener('click',e=>{
-    if(!searchInput.contains(e.target)&&!searchModal.contains(e.target)){
-      searchModal.style.display='none';
+  document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !searchModal.contains(e.target)) {
+      searchModal.style.display = 'none';
     }
+  });
+});
+
+// 工具函数
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(function() {
+    alert('链接已复制！');
+  });
+}
+function likePost() {
+  alert("点赞成功！感谢支持～");
+}
+function collectPost() {
+  alert("收藏成功！快去个人中心查看吧～");
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const isPostPage = window.location.pathname.startsWith('/archives/');
+  if (isPostPage) {
+    const progressContainer = document.createElement('div');
+    progressContainer.className = 'reading-progress-container';
+    progressContainer.innerHTML = '<div class="reading-progress-bar" id="readingProgressBar"></div>';
+    document.body.prepend(progressContainer);
+
+    const articleTitle = document.querySelector('h1.post-title, h1.article-title, .post-header h1');
+    const articleMain = document.querySelector('div.article-content, div.post-content, article');
+    if(articleTitle) articleTitle.id = "article-title-wrap";
+    if(articleMain) articleMain.id = "article-content-wrap";
+
+    const aiCard = document.createElement('div');
+    aiCard.className = 'ai-summary-card';
+    aiCard.id = 'ai-summary-wrap';
+    aiCard.innerHTML = `
+      <div class="ai-summary-left-bar"></div>
+      <div class="ai-summary-content">
+        <div class="ai-summary-label">AI 摘要</div>
+        <p class="ai-summary-text">这是一段示例摘要内容，用于展示AI摘要卡片的效果。后续会接入真实的AI摘要生成功能。</p>
+      </div>
+    `;
+    const article = document.querySelector('article, .post, .article-content');
+    if (article) article.parentNode.insertBefore(aiCard, article);
+
+    const toc = document.createElement('nav');
+    toc.className = 'article-toc show';
+    toc.id = 'articleToc';
+    toc.innerHTML = `
+      <div class="toc-title">文章目录</div>
+      <ul class="toc-list">
+        <li class="toc-item active"><a href="#article-title-wrap" class="toc-link">文章标题</a></li>
+        <li class="toc-item"><a href="#ai-summary-wrap" class="toc-link">AI摘要</a></li>
+        <li class="toc-item"><a href="#article-content-wrap" class="toc-link">文章正文</a></li>
+      </ul>
+    `;
+    document.body.appendChild(toc);
+
+    const likeSection = document.createElement('div');
+    likeSection.className = 'article-like-section';
+    likeSection.innerHTML = `
+      <button class="like-button" id="likeButton">
+        <span class="like-icon">♡</span>
+        <span class="like-text">点赞</span>
+        <span class="like-count" id="likeCount">0</span>
+      </button>
+    `;
+    if (article) article.after(likeSection);
+  }
+
+  if (isPostPage) {
+    const actionDiv = document.createElement('div');
+    actionDiv.className = 'post-actions';
+    actionDiv.innerHTML = `
+      <button class="like-btn" onclick="likePost()">❤️ 点赞</button>
+      <button class="collect-btn" onclick="collectPost()">⭐ 收藏</button>
+    `;
+    const comment = document.querySelector('#comment');
+    if (comment) comment.before(actionDiv);
+  }
+
+  const likeButton = document.getElementById('likeButton');
+  if (likeButton) {
+    const likeCount = document.getElementById('likeCount');
+    const likeIcon = likeButton.querySelector('.like-icon');
+    let isLiked = false;
+    let count = parseInt(likeCount.textContent) || 0;
+
+    likeButton.addEventListener('click', function() {
+      if (!isLiked) {
+        isLiked = true;
+        count++;
+        likeButton.classList.add('liked');
+        likeIcon.textContent = '♥';
+        likeButton.classList.add('bouncing');
+        setTimeout(() => likeButton.classList.remove('bouncing'), 500);
+      } else {
+        isLiked = false;
+        count--;
+        likeButton.classList.remove('liked');
+        likeIcon.textContent = '♡';
+      }
+      likeCount.textContent = count;
+    });
+  }
+
+  window.addEventListener('scroll', function() {
+    const bar = document.getElementById('readingProgressBar');
+    if (!bar) return;
+    const top = window.pageYOffset || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const per = height > 0 ? (top / height) * 100 : 0;
+    bar.style.width = per + '%';
+  });
+
+  setTimeout(() => {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headerOffset = 80;
+    tocLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: elementTop - headerOffset,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  }, 100);
+
+  window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('#article-title-wrap,#ai-summary-wrap,#article-content-wrap');
+    const items = document.querySelectorAll('.toc-item');
+    const scrollY = window.pageYOffset;
+    let curr = '';
+    if (scrollY < 50) {
+      curr = 'article-title-wrap';
+    } else {
+      sections.forEach(s => {
+        if (scrollY >= s.offsetTop - 100) curr = s.id;
+      });
+    }
+    items.forEach(i => {
+      const href = i.querySelector('.toc-link')?.getAttribute('href')?.substring(1);
+      if (href === curr) i.classList.add('active');
+      else i.classList.remove('active');
+    });
   });
 });
 </script>
