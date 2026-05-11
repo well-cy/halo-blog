@@ -243,7 +243,8 @@ header a,
 .article-item, .post-card, .search-result-item {
     transition: all 0.3s ease !important;
     border-radius: 12px !important;
-    overflow: hidden !important;
+    overflow: visible !important; /* 关键：允许卡片内容溢出 */
+    position: relative !important; /* 关键：让子元素可以绝对定位 */
 }
 .article-item:hover, .post-card:hover, .search-result-item:hover {
   transform: translateY(-3px);
@@ -291,16 +292,17 @@ header a,
   color: #666;
 }
 
-/* 阅读时间标签 */
-.read-time-label {
-  display: inline-block;
-  margin-left: 8px;
-  padding: 2px 6px;
+/* 阅读时间标签 - 固定在卡片右上角 */
+.read-time-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 3px 8px;
   font-size: 12px;
-  color: #888;
-  background: #f5f5f5;
+  color: #fff;
+  background: #c45428;
   border-radius: 4px;
-  vertical-align: middle;
+  z-index: 10; /* 确保标签在卡片上方 */
 }
 
 /* 搜索无结果提示 */
@@ -316,6 +318,7 @@ header a,
 }
 .search-empty-tip p {
   font-size: 13px;
+  color: #666;
 }
 
 /* ========== AI摘要卡片样式 ========== */
@@ -470,7 +473,6 @@ header a,
   display: block;
   padding: 4px 8px;
   border-radius: 4px;
-  transition: all 0.2s ease;
   border-left: 2px solid transparent;
   font-size: 13px;
   line-height: 1.5;
@@ -520,7 +522,7 @@ header a,
 </div>
 
 <script>
-// 终极搜索：直接抓取页面所有文章，100%能搜到
+// 1. 搜索功能：移除阅读时间，只显示标题
 document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('halo-search-input');
   const searchModal = document.getElementById('search-modal');
@@ -540,7 +542,10 @@ document.addEventListener('DOMContentLoaded', function() {
       let text = link.innerText.toLowerCase();
       let href = link.href;
       if (href.includes('/archives/') && text.includes(keyword)) {
-        results.push({ title: link.innerText, url: href });
+        results.push({ 
+          title: link.innerText, 
+          url: href
+        });
       }
     });
 
@@ -569,6 +574,40 @@ document.addEventListener('DOMContentLoaded', function() {
       searchModal.style.display = 'none';
     }
   });
+});
+
+// 2. 文章卡片右上角自动生成阅读时间（强制生效版）
+document.addEventListener('DOMContentLoaded', function() {
+  // 等待页面完全加载后执行（双重延迟，确保渲染完成）
+  setTimeout(() => {
+    // 阅读速度：按每分钟 400 字计算
+    const WORDS_PER_MINUTE = 400;
+
+    // 匹配所有文章卡片
+    const allCards = document.querySelectorAll('.post-card, .article-item, div[class*="col"]');
+
+    allCards.forEach(card => {
+      // 跳过已经生成过阅读时间的卡片
+      if (card.querySelector('.read-time-badge')) return;
+
+      // 读取卡片内的文本（兜底方案）
+      const fullText = card.textContent.trim();
+      if (fullText.length < 10) return;
+
+      // 过滤无关文本，计算阅读时间
+      const cleanText = fullText.replace(/发布于|20\d{2}-\d{2}-\d{2}|[a-zA-Z0-9@]+/g, '');
+      const wordCount = cleanText.length;
+      const readTime = Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
+
+      // 生成阅读时间标签（右上角样式）
+      const badge = document.createElement('div');
+      badge.className = 'read-time-badge';
+      badge.textContent = `${readTime} 分钟`;
+
+      // 强制添加到卡片内
+      card.appendChild(badge);
+    });
+  }, 1000); // 延迟 1 秒执行，确保页面完全加载
 });
 
 // 工具函数
