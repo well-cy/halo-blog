@@ -902,3 +902,63 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
+<style>
+/* 自定义登录页面 - 民大校园风格 */
+body.page-login,
+body.login-page,
+body[data-page="login"] {
+  background: linear-gradient(135deg, #fceee6 0%, #fff5f0 100%) !important;
+  min-height: 100vh;
+}
+
+/* 登录卡片 */
+.login-box,
+.card.login,
+.login-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 30px rgba(196, 84, 40, 0.15) !important;
+  border: none !important;
+}
+
+/* 登录按钮 */
+.login-btn,
+button[type="submit"].login,
+.btn-login {
+  background: #c45428 !important;
+  border-color: #c45428 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  transition: background 0.3s ease !important;
+}
+.login-btn:hover,
+button[type="submit"].login:hover,
+.btn-login:hover {
+  background: #a84722 !important;
+  border-color: #a84722 !important;
+}
+
+/* 输入框 */
+.login-input,
+.form-control.login,
+input[name="username"],
+input[name="password"] {
+  border-color: #e0e0e0 !important;
+  border-radius: 8px !important;
+}
+.login-input:focus,
+.form-control.login:focus,
+input[name="username"]:focus,
+input[name="password"]:focus {
+  border-color: #c45428 !important;
+  box-shadow: 0 0 0 3px rgba(196, 84, 40, 0.1) !important;
+}
+
+/* 标题文字 */
+.login-title,
+h1.login-header,
+.login-header h1 {
+  color: #c45428 !important;
+}
+</style>
