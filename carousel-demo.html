@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< feature/deploy
   <title>我的校园博客 | 民大清新主题</title>
   <style>
     /* 民大红色主色调配色变量 */
@@ -12,6 +13,17 @@
       --text-color: #333333;       /* 正文色：深灰 */
       --light-text: #666666;       /* 次要文字色：中灰 */
       --bg-color: #FFFFFF;         /* 背景色：纯白 */
+=======
+  <title>我的校园博客</title>
+  <style>
+    /* 校园清新风格配色变量 */
+    :root {
+      --primary-color: #4A90E2;    /* 主色：清爽天蓝 */
+      --secondary-color: #6BBF70;  /* 辅助色：嫩草绿 */
+      --text-color: #333333;       /* 正文色：深灰，保证可读性 */
+      --light-text: #666666;       /* 次要文字色：中灰 */
+      --bg-color: #F8FAFC;         /* 背景色：米白，不刺眼 */
+>>>>>>> main
       --card-bg: #FFFFFF;          /* 卡片背景：纯白 */
       --border-color: #E2E8F0;     /* 边框色：浅灰 */
     }
@@ -25,6 +37,7 @@
       padding: 0;
     }
 
+<<<<<<< feature/deploy
     /* 头部导航栏（Logo+副标题+用户头像） */
     header {
       background-color: var(--card-bg);
@@ -37,6 +50,14 @@
 
     .header-left {
       text-align: left;
+=======
+    /* 头部导航栏（Logo+副标题） */
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px;
+      text-align: center;
+>>>>>>> main
     }
 
     /* Logo文字 */
@@ -54,6 +75,7 @@
       margin: 8px 0 0;
     }
 
+<<<<<<< feature/deploy
     /* 用户头像入口 */
     .user-avatar {
       width: 40px;
@@ -68,6 +90,8 @@
       cursor: pointer;
     }
 
+=======
+>>>>>>> main
     /* 轮播图容器 */
     .carousel {
       width: 100%;
@@ -85,6 +109,7 @@
       object-fit: cover;
     }
 
+<<<<<<< feature/deploy
     /* 主体内容区（主内容+侧边栏布局） */
     .main-container {
       max-width: 1200px;
@@ -252,6 +277,30 @@
       color: var(--text-color);
       line-height: 1.8;
       text-align: center;
+=======
+    /* 文章卡片 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+    }
+
+    .card p {
+      color: var(--light-text);
+>>>>>>> main
     }
 
     /* 页脚信息 */
@@ -270,6 +319,7 @@
   </style>
 </head>
 <body>
+<<<<<<< feature/deploy
   <!-- 头部：Logo + 副标题 + 用户头像 -->
   <header>
     <div class="header-left">
@@ -279,6 +329,12 @@
     <div class="user-avatar">
       我
     </div>
+=======
+  <!-- 头部：Logo + 副标题 -->
+  <header>
+    <h1 class="site-logo">✨ 我的校园博客</h1>
+    <p class="site-subtitle">记录校园生活 · 分享学习点滴 · 留下青春印记</p>
+>>>>>>> main
   </header>
 
   <!-- 轮播图模块 -->
@@ -286,6 +342,7 @@
     <img src="https://picsum.photos/1200/400?random=1" alt="校园活动轮播图">
   </div>
 
+<<<<<<< feature/deploy
   <!-- 主体内容区（主内容+侧边栏） -->
   <div class="main-container">
     <!-- 博客内容区 -->
@@ -352,13 +409,29 @@
     <div class="about-content">
       <p>我们是民大软件工程专业的学生，这个博客是我们的课程项目之一。</p>
       <p>我们希望通过这个平台，分享校园生活、学习心得和技术成长。</p>
+=======
+  <!-- 博客内容区 -->
+  <div class="container">
+    <div class="card">
+      <h3>校园生活分享</h3>
+      <p>记录在校园里的日常点滴，分享学习与生活的小确幸...</p>
+    </div>
+    <div class="card">
+      <h3>期末复习指南</h3>
+      <p>整理了各科的复习重点和笔记，希望能帮到大家...</p>
+>>>>>>> main
     </div>
   </div>
 
   <!-- 页脚信息 -->
   <footer>
+<<<<<<< feature/deploy
     <p class="footer-text">© 2026 民大校园博客 | All Rights Reserved</p>
     <p class="footer-text"> Powered by Halo | 民大红色主题 v1.0</p>
+=======
+    <p class="footer-text">© 2026 我的校园博客 | All Rights Reserved</p>
+    <p class="footer-text"> Powered by Halo | 校园清新主题 v1.0</p>
+>>>>>>> main
   </footer>
 </body>
 </html>
