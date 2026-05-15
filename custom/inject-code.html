@@ -110,7 +110,7 @@ header a,
     color: #ffffff !important;
 }
 
-/* 悬浮写文章按钮（已修复跳转） */
+/* 悬浮写文章按钮（已改对地址：/console/posts/editor） */
 #float-write-btn {
   position: fixed;
   right: 30px;
@@ -552,7 +552,8 @@ header a,
   <div id="search-results-list"></div>
 </div>
 
-<button id="float-write-btn">✏️</button>
+<!-- 悬浮写文章按钮（正确地址） -->
+<button id="float-write-btn" onclick="location.href='/console/posts/editor'">✏️</button>
 
 <div id="top-notice-bar">
   📢 校园博客观迎你！分享学习、生活、趣事都可以投稿～
@@ -565,30 +566,8 @@ header a,
 </div>
 
 <script>
-// 修复发文章按钮跳转
-document.addEventListener('DOMContentLoaded', function() {
-  const editUrl = '/console/posts/new';
-  const floatBtn = document.getElementById('float-write-btn');
-  if (floatBtn) {
-    floatBtn.onclick = function() {
-      window.location.href = editUrl;
-    };
-  }
-  // 导航栏发文章按钮修复
-  const navWriteBtns = document.querySelectorAll('a:has(.nav-btn), .nav-btn');
-  navWriteBtns.forEach(btn => {
-    btn.setAttribute('href', editUrl);
-    btn.onclick = null;
-  });
-  // 仅登录可见
-  if (!document.cookie.includes('access_token')) {
-    document.querySelectorAll('#float-write-btn, .nav-btn').forEach(el => el.style.display = 'none');
-  }
-});
-
-// 1. 每个分类的专属介绍文案（可自行修改）
+// 1. 每个分类的专属介绍文案
 const categoryDescriptions = {
-  '默认分类': '这里是默认分类，收录未分类的文章内容。',
   '活动资讯': '活动资讯 | 校园活动、讲座通知、赛事动态一手掌握。',
   '日常生活': '日常生活 | 记录大学生活点滴、学习心得与生活感悟。',
   '社团动态': '社团动态 | 各大社团招新、活动分享与成长故事。',
@@ -596,7 +575,7 @@ const categoryDescriptions = {
   '校园新闻': '校园新闻 | 校园大事、通知公告、校园热点全收录。'
 };
 
-// 2. 终极方案：通过URL判断当前分类，无需依赖标签状态
+// 2. 通过URL判断当前分类
 function updateCategoryIntroByURL() {
   const introBox = document.getElementById('categoryIntro');
   if (!introBox) return;
@@ -604,33 +583,21 @@ function updateCategoryIntroByURL() {
   const url = window.location.href;
   let currentCat = '';
 
-  // 根据URL路径判断分类（可根据你的实际URL修改）
-  if (url.includes('/categories/ri-chang-sheng-huo')) {
-    currentCat = '日常生活';
-  } else if (url.includes('/categories/huo-dong-zi-xun')) {
-    currentCat = '活动资讯';
-  } else if (url.includes('/categories/she-tuan-dong-tai')) {
-    currentCat = '社团动态';
-  } else if (url.includes('/categories/xue-xi-bi-ji')) {
-    currentCat = '学习笔记';
-  } else if (url.includes('/categories/xiao-yuan-xin-wen')) {
-    currentCat = '校园新闻';
-  } else if (url.includes('/categories/mo-ren-fen-lei')) {
-    currentCat = '默认分类';
-  } else {
-    // 默认文案
+  if (url.includes('/categories/ri-chang-sheng-huo')) currentCat = '日常生活';
+  else if (url.includes('/categories/huo-dong-zi-xun')) currentCat = '活动资讯';
+  else if (url.includes('/categories/she-tuan-dong-tai')) currentCat = '社团动态';
+  else if (url.includes('/categories/xue-xi-bi-ji')) currentCat = '学习笔记';
+  else if (url.includes('/categories/xiao-yuan-xin-wen')) currentCat = '校园新闻';
+  else if (url.includes('/categories/mo-ren-fen-lei')) currentCat = '默认分类';
+  else {
     introBox.textContent = '这里是分类介绍文字，展示当前分类下的文章内容说明～';
     return;
   }
 
-  // 显示对应分类的介绍
   introBox.textContent = categoryDescriptions[currentCat] || `这里是${currentCat}分类，分享相关文章内容。`;
 }
 
-// 页面加载时执行（100%生效）
-document.addEventListener('DOMContentLoaded', function () {
-  updateCategoryIntroByURL();
-});
+document.addEventListener('DOMContentLoaded', updateCategoryIntroByURL);
 
 // 3. 强制给文章卡片的分类文字套上彩色标签
 document.addEventListener('DOMContentLoaded', function() {
@@ -675,10 +642,7 @@ document.addEventListener('DOMContentLoaded', function() {
       let text = link.innerText.toLowerCase();
       let href = link.href;
       if (href.includes('/archives/') && text.includes(keyword)) {
-        results.push({ 
-          title: link.innerText, 
-          url: href
-        });
+        results.push({ title: link.innerText, url: href });
       }
     });
 
@@ -697,9 +661,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   searchInput.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-      searchArticle(this.value);
-    }
+    if (e.key === 'Enter') searchArticle(this.value);
   });
 
   document.addEventListener('click', function(e) {
@@ -733,16 +695,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 工具函数
 function copyLink() {
-  navigator.clipboard.writeText(window.location.href).then(function() {
-    alert('链接已复制！');
-  });
+  navigator.clipboard.writeText(window.location.href).then(() => alert('链接已复制！'));
 }
-function likePost() {
-  alert("点赞成功！感谢支持～");
-}
-function collectPost() {
-  alert("收藏成功！快去个人中心查看吧～");
-}
+function likePost() { alert("点赞成功！感谢支持～"); }
+function collectPost() { alert("收藏成功！快去个人中心查看吧～"); }
 
 document.addEventListener('DOMContentLoaded', function() {
   const isPostPage = window.location.pathname.startsWith('/archives/');
@@ -771,7 +727,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (article) article.parentNode.insertBefore(aiCard, article);
 
     const toc = document.createElement('nav');
-    toc.className = 'article-toc show';
+    toc.className = 'article-toc';
     toc.id = 'articleToc';
     toc.innerHTML = `
       <div class="toc-title">文章目录</div>
@@ -864,138 +820,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const items = document.querySelectorAll('.toc-item');
     const scrollY = window.pageYOffset;
     let curr = '';
-    if (scrollY < 50) {
-      curr = 'article-title-wrap';
-    } else {
-      sections.forEach(s => {
-        if (scrollY >= s.offsetTop - 100) curr = s.id;
-      });
-    }
+    if (scrollY < 50) curr = 'article-title-wrap';
+    else sections.forEach(s => { if (scrollY >= s.offsetTop - 100) curr = s.id; });
     items.forEach(i => {
       const href = i.querySelector('.toc-link')?.getAttribute('href')?.substring(1);
-      if (href === curr) i.classList.add('active');
-      else i.classList.remove('active');
+      i.classList.toggle('active', href === curr);
     });
   });
 });
 </script>
-
-<style>
-/* 自定义404页面样式 - 民大校园风格 */
-body.error-404 {
-  background: #fceee6 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  margin: 0;
-  font-family: "Microsoft YaHei", sans-serif;
-}
-.error-404-container {
-  text-align: center;
-  padding: 2rem;
-}
-.error-404-logo {
-  width: 120px;
-  margin-bottom: 1.5rem;
-}
-.error-404 h1 {
-  font-size: 6rem;
-  color: #c45428;
-  margin: 0;
-}
-.error-404 p {
-  font-size: 1.2rem;
-  color: #666;
-  margin: 1rem 0 2rem;
-}
-.error-404 .btn-home {
-  display: inline-block;
-  padding: 0.8rem 2rem;
-  background: #c45428;
-  color: white;
-  text-decoration: none;
-  border-radius: 30px;
-  transition: background 0.3s;
-}
-.error-404 .btn-home:hover {
-  background: #a84722;
-}
-</style>
-
-<script>
-// 劫持404页面并注入自定义内容
-document.addEventListener('DOMContentLoaded', function() {
-  if (document.title.includes('404') || document.body.textContent.includes('404')) {
-    document.body.classList.add('error-404');
-    document.body.innerHTML = `
-      <div class="error-404-container">
-        <div class="error-404-logo">🏫</div>
-        <h1>404</h1>
-        <p>哎呀，页面走丢啦！可能是地址输入错误，或者页面已被移除。</p>
-        <a href="/" class="btn-home">返回校园博客首页</a>
-      </div>
-    `;
-  }
-});
-</script>
-
-<style>
-/* 自定义登录页面 - 民大校园风格 */
-body.page-login,
-body.login-page,
-body[data-page="login"] {
-  background: linear-gradient(135deg, #fceee6 0%, #fff5f0 100%) !important;
-  min-height: 100vh;
-}
-
-/* 登录卡片 */
-.login-box,
-.card.login,
-.login-card {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 8px 30px rgba(196, 84, 40, 0.15) !important;
-  border: none !important;
-}
-
-/* 登录按钮 */
-.login-btn,
-button[type="submit"].login,
-.btn-login {
-  background: #c45428 !important;
-  border-color: #c45428 !important;
-  color: white !important;
-  border-radius: 8px !important;
-  transition: background 0.3s ease !important;
-}
-.login-btn:hover,
-button[type="submit"].login:hover,
-.btn-login:hover {
-  background: #a84722 !important;
-  border-color: #a84722 !important;
-}
-
-/* 输入框 */
-.login-input,
-.form-control.login,
-input[name="username"],
-input[name="password"] {
-  border-color: #e0e0e0 !important;
-  border-radius: 8px !important;
-}
-.login-input:focus,
-.form-control.login:focus,
-input[name="username"]:focus,
-input[name="password"]:focus {
-  border-color: #c45428 !important;
-  box-shadow: 0 0 0 3px rgba(196, 84, 40, 0.1) !important;
-}
-
-/* 标题文字 */
-.login-title,
-h1.login-header,
-.login-header h1 {
-  color: #c45428 !important;
-}
-</style>
