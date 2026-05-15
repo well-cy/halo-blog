@@ -110,7 +110,7 @@ header a,
     color: #ffffff !important;
 }
 
-/* 悬浮写文章按钮 */
+/* 悬浮写文章按钮（已修复跳转） */
 #float-write-btn {
   position: fixed;
   right: 30px;
@@ -552,7 +552,7 @@ header a,
   <div id="search-results-list"></div>
 </div>
 
-<button id="float-write-btn" onclick="window.open('/console/#/editor/posts', '_blank')">✏️</button>
+<button id="float-write-btn">✏️</button>
 
 <div id="top-notice-bar">
   📢 校园博客观迎你！分享学习、生活、趣事都可以投稿～
@@ -565,6 +565,27 @@ header a,
 </div>
 
 <script>
+// 修复发文章按钮跳转
+document.addEventListener('DOMContentLoaded', function() {
+  const editUrl = '/console/posts/new';
+  const floatBtn = document.getElementById('float-write-btn');
+  if (floatBtn) {
+    floatBtn.onclick = function() {
+      window.location.href = editUrl;
+    };
+  }
+  // 导航栏发文章按钮修复
+  const navWriteBtns = document.querySelectorAll('a:has(.nav-btn), .nav-btn');
+  navWriteBtns.forEach(btn => {
+    btn.setAttribute('href', editUrl);
+    btn.onclick = null;
+  });
+  // 仅登录可见
+  if (!document.cookie.includes('access_token')) {
+    document.querySelectorAll('#float-write-btn, .nav-btn').forEach(el => el.style.display = 'none');
+  }
+});
+
 // 1. 每个分类的专属介绍文案（可自行修改）
 const categoryDescriptions = {
   '默认分类': '这里是默认分类，收录未分类的文章内容。',
