@@ -117,6 +117,26 @@ header a:hover,
     color: #fceee6 !important;
 }
 
+/* ====================== 夜间模式适配（已添加） ====================== */
+body.dark {
+  background-color: #1a1a1a !important;
+  color: #eee !important;
+}
+body.dark #comment,
+body.dark .about-section {
+  background: #2a2a2a !important;
+  color: #eee !important;
+}
+body.dark header,
+body.dark .site-header {
+  background-color: #8b3a1c !important;
+}
+body.dark .search-input {
+  background: #333 !important;
+  color: #fff !important;
+  border-color: #555 !important;
+}
+
 /* ====================== 导航栏右侧用户头像 ====================== */
 .user-avatar {
   position: absolute;
@@ -374,42 +394,57 @@ header a:hover,
   <span id="close-notice" onclick="document.getElementById('top-notice-bar').style.display='none'">×</span>
 </div>
 
-<!-- 关键修改：把关于我们版块直接注入到文章列表上方 -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // 夜间模式自动识别（已添加）
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+  }
+
+  // 1. 插入关于我们版块（终极方案：强行插入到文章列表上方）
   const aboutHTML = `
     <div class="about-section">
       <h2>关于我们</h2>
       <p>民大校园博客是一个专注于校园生活、学习分享、活动记录的开放式平台。我们致力于打造温暖、真实、有价值的校园内容社区，让每一位同学都能在这里记录成长、分享热爱、收获共鸣。</p>
     </div>
   `;
-  // 找到文章列表容器，把版块插入到它前面
-  const articleContainer = document.querySelector('.content-wrap, .post-list, article-list, .container');
-  if (articleContainer && articleContainer.previousElementSibling) {
-    articleContainer.parentNode.insertBefore(document.createRange().createContextualFragment(aboutHTML), articleContainer);
-  } else if (articleContainer) {
-    articleContainer.insertAdjacentHTML('beforebegin', aboutHTML);
+
+  // 尝试所有可能的文章列表容器
+  const containers = [
+    document.querySelector('.content-wrap'),
+    document.querySelector('.post-list'),
+    document.querySelector('.article-list'),
+    document.querySelector('.container'),
+    document.querySelector('main'),
+    document.querySelector('#main')
+  ];
+
+  for (let container of containers) {
+    if (container) {
+      container.insertAdjacentHTML('beforebegin', aboutHTML);
+      break;
+    }
   }
 
-  // 复制分享链接
+  // 2. 复制分享链接
   function copyLink() {
     navigator.clipboard.writeText(window.location.href).then(() => alert("链接已复制！"));
   }
 
-  // 点赞功能
+  // 3. 点赞功能
   function likePost() { alert("点赞成功！感谢支持～"); }
 
-  // 收藏功能
+  // 4. 收藏功能
   function collectPost() { alert("收藏成功！可在个人中心查看～"); }
 
-  // 模拟文章数据（用于本地搜索）
+  // 5. 模拟文章数据（用于本地搜索）
   const mockArticles = [
     { title: "运动会精彩瞬间回顾", content: "本次运动会有短跑、跳远、接力赛等项目，同学们表现出色。" },
     { title: "校园篮球赛决赛", content: "校队在决赛中以2分险胜，夺得冠军。" },
     { title: "期末复习指南", content: "各科复习重点和时间规划建议，助你高效备考。" }
   ];
 
-  // 文章页面自动插入点赞收藏按钮
+  // 6. 文章页面自动插入点赞收藏按钮
   const path = window.location.pathname;
   if (path !== '/' && !path.includes('/category/') && !path.includes('/tag/')) {
     const actionDiv = document.createElement('div');
@@ -422,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (comment) comment.before(actionDiv);
   }
 
-  // 修改副标题 + 页脚
+  // 7. 修改副标题 + 页脚
   const logo = document.querySelector('.logo a');
   if (logo) logo.innerText = "民大校园博客";
 
