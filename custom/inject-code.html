@@ -117,7 +117,7 @@ header a:hover,
     color: #fceee6 !important;
 }
 
-/* ====================== 夜间模式适配（已添加） ====================== */
+/* 夜间模式适配 */
 body.dark {
   background-color: #1a1a1a !important;
   color: #eee !important;
@@ -137,7 +137,7 @@ body.dark .search-input {
   border-color: #555 !important;
 }
 
-/* ====================== 导航栏右侧用户头像 ====================== */
+/* 导航栏右侧用户头像 */
 .user-avatar {
   position: absolute;
   right: 20px;
@@ -158,7 +158,7 @@ body.dark .search-input {
   object-fit: cover;
 }
 
-/* ====================== 悬浮写文章按钮 ====================== */
+/* 悬浮写文章按钮 */
 #float-write-btn {
   position: fixed;
   right: 30px;
@@ -203,7 +203,7 @@ body.dark .search-input {
   font-weight: bold;
 }
 
-/* 分类介绍文字（固定在顶部，强制可见） */
+/* 分类介绍文字 */
 .category-intro {
   background: #fceee6;
   padding: 20px;
@@ -240,9 +240,9 @@ body.dark .search-input {
 .search-box {
   position: fixed;
   top: 12px;
-  right: 20px;
+  right: 12px;
   z-index: 999999;
-  width: 240px;
+  width: 200px;
   height: 36px;
 }
 .search-input {
@@ -255,15 +255,12 @@ body.dark .search-input {
   font-size: 14px;
   background: #fff;
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 .search-input:focus {
   border-color: #c45428;
   box-shadow: 0 0 0 3px rgba(196,84,40,0.15), 0 0 8px rgba(196,84,40,0.25);
   transform: scale(1.02);
-}
-.search-input:hover {
-  border-color: #ccc;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 .search-icon {
   position: absolute;
@@ -272,44 +269,17 @@ body.dark .search-input {
   transform: translateY(-50%);
   font-size: 14px;
   color: #999;
-  transition: color 0.3s ease;
 }
 .search-input:focus ~ .search-icon {
   color: #c45428;
 }
+
 @media (max-width: 768px) {
-  .search-box {
-    width: 36px;
-    overflow: hidden;
-  }
-  .search-box:hover { width: 160px; }
-  .search-input { opacity: 0; width: 0; border: none; }
-  .search-box:hover .search-input { opacity: 1; width: 100%; }
+  .search-box { width: auto; right: 10px; top: 10px; }
+  .search-input { width: 180px; }
 }
 
-/* 搜索结果高亮、卡片样式 */
-.highlighted, .search-highlight {
-    background-color: #fff3a0 !important;
-    color: #c45428 !important;
-    font-weight: bold !important;
-    padding: 2px 4px;
-    border-radius: 3px;
-}
-.article-item, .post-card, .search-result-item {
-    transition: all 0.3s ease !important;
-    border-radius: 12px !important;
-    overflow: visible !important;
-    position: relative !important;
-}
-.article-item:hover, .post-card:hover, .search-result-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-.search-result-title {
-    color: #c45428 !important;
-    font-weight: bold !important;
-}
-
+/* 搜索结果 */
 #search-modal {
   display: none;
   position: fixed;
@@ -328,263 +298,407 @@ body.dark .search-input {
   margin: 0;
   background: #fceee6;
   color: #c45428;
-  border-radius: 12px 12px 0 0;
 }
 .search-result-card {
   padding: 12px;
   border-bottom: 1px solid #eee;
 }
-.search-result-card:last-child {
-  border-bottom: none;
-}
-.search-result-card h4 {
-  margin: 0 0 4px;
-  font-size: 14px;
-}
-.search-result-card p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
+.search-empty-tip {
+  padding: 30px 20px;
+  text-align: center;
+  color: #999;
 }
 
-/* ====================== 关于我们版块样式 ====================== */
-.about-section {
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 25px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+/* 阅读时间 */
+.read-time-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 3px 8px;
+  font-size: 12px;
+  color: #fff;
+  background: #c45428;
+  border-radius: 4px;
 }
-.about-section h2 {
-  color: #c45428;
-  font-size: 24px;
-  margin-bottom: 15px;
-  padding-left: 12px;
-  border-left: 5px solid #c45428;
+
+/* 彩色分类标签 */
+.cat-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  border-radius: 12px;
+  color: #fff;
 }
-.about-section p {
+.cat-badge.默认分类 { background: #64748b; }
+.cat-badge.活动资讯 { background: #3b82f6; }
+.cat-badge.日常生活 { background: #10b981; }
+.cat-badge.社团动态 { background: #8b5cf6; }
+.cat-badge.学习笔记 { background: #f59e0b; }
+.cat-badge.校园新闻 { background: #ef4444; }
+
+/* AI摘要 */
+.ai-summary-card {
+  display: flex;
+  background: linear-gradient(135deg, #e8f4fd 0%, #d4eafc 100%);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.ai-summary-left-bar {
+  width: 5px;
+  background: #3b82f6;
+  margin-right: 16px;
+}
+.ai-summary-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2563eb;
+}
+.ai-summary-text {
   font-size: 15px;
-  line-height: 1.8;
-  color: #444;
+  line-height: 1.7;
+}
+
+/* 点赞按钮 */
+.article-like-section {
+  text-align: center;
+  margin: 40px 0;
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+}
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+}
+.like-button:hover {
+  border-color: #ff6b81;
+  color: #ff6b81;
+}
+.like-button.liked {
+  border-color: #ff6b81;
+  color: #ff6b81;
+  background: #fff5f6;
+}
+
+/* 阅读进度条 */
+.reading-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 10000;
+}
+.reading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #c45428;
+}
+
+/* 文章目录 */
+.article-toc {
+  position: fixed;
+  right: 20px;
+  top: 120px;
+  width: 220px;
+  max-height: calc(100vh - 160px);
+  background: #fff;
+  border-left: 1px solid #eee;
+  padding: 20px;
+  z-index: 100;
+  border-radius: 8px 0 0 8px;
+}
+.toc-link {
+  color: #666;
+  padding: 4px 8px;
+  display: block;
+}
+.toc-item.active .toc-link {
+  color: #c45428;
+  font-weight: bold;
+  border-left: 2px solid #c45428;
+  padding-left: 6px;
+}
+
+/* 登录页美化 */
+body.login-page {
+  background: linear-gradient(135deg, #fceee6 0%, #fff5f0 100%) !important;
+}
+.login-box .logo img {
+  display: none !important;
+}
+.login-box .logo::before {
+  content: "民大校园生活圈" !important;
+  font-size: 26px !important;
+  font-weight: bold !important;
+  color: #c45428 !important;
+}
+.login-btn {
+  background: #c45428 !important;
+  border-color: #c45428 !important;
+}
+
+/* 隐藏登录页Halo Logo */
+.login-logo, .auth-logo img, 
+[class*="login"] img,
+[class*="auth"] img {
+  display: none !important;
+}
+
+/* 热门文章只显示前5篇 */
+.widget_popular_posts li:nth-child(n+6),
+[class*='popular-posts'] li:nth-child(n+6),
+.popular-posts li:nth-child(n+6),
+.sidebar [class*='popular'] li:nth-child(n+6) {
+  display: none !important;
 }
 </style>
 
-<!-- 导航栏右侧：用户头像 -->
-<div class="user-avatar" onclick="window.open('/console','_blank')">
-  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=student" alt="用户头像">
-</div>
-
-<!-- 5号作业：搜索框 导航栏右侧 -->
+<!-- 搜索框 -->
 <div class="search-box">
   <span class="search-icon">🔍</span>
   <input type="text" class="search-input" id="halo-search-input" placeholder="搜索文章...">
 </div>
-
-<!-- 搜索弹窗 -->
 <div id="search-modal">
   <h3>📑 搜索结果</h3>
   <div id="search-results-list"></div>
 </div>
 
-<button id="float-write-btn" onclick="window.open('/console/#/editor/posts', '_blank')">✏️</button>
+<!-- 写文章按钮 -->
+<button id="float-write-btn" onclick="location.href='/console/posts/editor'">✏️</button>
 
+<!-- 公告栏 -->
 <div id="top-notice-bar">
-  📢 校园博客观迎你！分享学习、生活、趣事都可以投稿～
-  <span id="close-notice" onclick="document.getElementById('top-notice-bar').style.display='none'">×</span>
+  📢 民大校园生活圈欢迎你！分享学习、生活、趣事都可以投稿～
+  <span id="close-notice" onclick="this.parentElement.style.display='none'">×</span>
 </div>
 
+<!-- 分类介绍 -->
+<div class="category-intro" id="categoryIntro">加载中...</div>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // 夜间模式自动识别（已添加）
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark');
+// 夜间模式
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark');
+}
+
+// 分类介绍
+const categoryDescriptions = {
+  '活动资讯': '活动资讯 | 校园活动、讲座通知一手掌握。',
+  '日常生活': '日常生活 | 记录大学生活点滴。',
+  '社团动态': '社团动态 | 各大社团活动分享。',
+  '学习笔记': '学习笔记 | 干货、复习、经验分享。',
+  '校园新闻': '校园新闻 | 校园大事全收录。'
+};
+
+function updateCategoryIntroByURL() {
+  const introBox = document.getElementById('categoryIntro');
+  if (!introBox) return;
+  const url = window.location.href;
+  let cat = '';
+  if (url.includes('/categories/huo-dong-zi-xun')) cat = '活动资讯';
+  else if (url.includes('/categories/ri-chang-sheng-huo')) cat = '日常生活';
+  else if (url.includes('/categories/she-tuan-dong-tai')) cat = '社团动态';
+  else if (url.includes('/categories/xue-xi-bi-ji')) cat = '学习笔记';
+  else if (url.includes('/categories/xiao-yuan-xin-wen')) cat = '校园新闻';
+  introBox.textContent = categoryDescriptions[cat] || '校园生活分享平台';
+}
+
+// 搜索功能
+function initSearch() {
+  const input = document.getElementById('halo-search-input');
+  const modal = document.getElementById('search-modal');
+  const list = document.getElementById('search-results-list');
+  if (!input) return;
+  
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const kw = input.value.trim().toLowerCase();
+      if (!kw) {
+        modal.style.display = 'none';
+        return;
+      }
+      const results = [];
+      document.querySelectorAll('a').forEach(link => {
+        if (link.href && link.href.includes('/archives/') && link.innerText.toLowerCase().includes(kw)) {
+          results.push({ title: link.innerText, url: link.href });
+        }
+      });
+      list.innerHTML = results.length === 0
+        ? '<div class="search-empty-tip"><h4>暂无结果</h4></div>'
+        : results.map(function(item) {
+            return '<div class="search-result-card"><h4><a href="' + item.url + '" target="_blank">' + item.title + '</a></h4></div>';
+          }).join('');
+      modal.style.display = 'block';
+    }
+  });
+  
+  document.addEventListener('click', function(e) {
+    if (input && modal && !input.contains(e.target) && !modal.contains(e.target)) {
+      modal.style.display = 'none';
+    }
+  });
+}
+
+// 阅读时间标签
+function initReadTime() {
+  setTimeout(function() {
+    document.querySelectorAll('.post-card, .article-item').forEach(function(card) {
+      if (card.querySelector('.read-time-badge')) return;
+      var t = card.textContent.trim();
+      if (t.length < 50) return;
+      var min = Math.max(1, Math.ceil(t.length / 400));
+      var badge = document.createElement('div');
+      badge.className = 'read-time-badge';
+      badge.textContent = min + ' 分钟';
+      card.style.position = 'relative';
+      card.appendChild(badge);
+    });
+  }, 1000);
+}
+
+// 彩色分类标签
+function initColorTags() {
+  setTimeout(function() {
+    var cats = ['活动资讯', '日常生活', '社团动态', '学习笔记', '校园新闻', '默认分类'];
+    document.querySelectorAll('.post-card, .article-item').forEach(function(card) {
+      var walker = document.createTreeWalker(card, NodeFilter.SHOW_TEXT);
+      var node;
+      while (node = walker.nextNode()) {
+        var text = node.textContent.trim();
+        if (cats.includes(text)) {
+          var span = document.createElement('span');
+          span.className = 'cat-badge ' + text;
+          span.textContent = text;
+          node.parentNode.replaceChild(span, node);
+          break;
+        }
+      }
+    });
+  }, 2000);
+}
+
+// 文章页功能
+function initPostFeatures() {
+  var isPost = location.pathname.startsWith('/archives/');
+  if (!isPost) return;
+
+  // 进度条
+  var progressContainer = document.createElement('div');
+  progressContainer.className = 'reading-progress-container';
+  progressContainer.innerHTML = '<div class="reading-progress-bar" id="readingProgressBar"></div>';
+  document.body.prepend(progressContainer);
+  
+  window.addEventListener('scroll', function() {
+    var bar = document.getElementById('readingProgressBar');
+    if (!bar) return;
+    var top = window.pageYOffset;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    bar.style.width = height > 0 ? (top / height) * 100 + '%' : '0%';
+  });
+
+  // AI摘要
+  var aiCard = document.createElement('div');
+  aiCard.className = 'ai-summary-card';
+  aiCard.innerHTML = '<div class="ai-summary-left-bar"></div><div class="ai-summary-content"><div class="ai-summary-label">🤖 AI 摘要</div><p class="ai-summary-text">本文为校园生活分享内容，欢迎阅读～</p></div>';
+  var article = document.querySelector('article, .post-content, .article-content');
+  if (article) article.before(aiCard);
+
+  // 目录导航
+  var toc = document.createElement('nav');
+  toc.className = 'article-toc';
+  toc.innerHTML = '<div class="toc-title">📖 文章目录</div><ul class="toc-list"><li class="toc-item active"><a class="toc-link" href="#">文章标题</a></li><li class="toc-item"><a class="toc-link" href="#">正文内容</a></li></ul>';
+  document.body.appendChild(toc);
+
+  // 点赞收藏按钮
+  var actions = document.createElement('div');
+  actions.className = 'post-actions';
+  actions.innerHTML = '<button class="like-btn" onclick="alert(\'❤️ 感谢点赞！\')">👍 点赞</button><button class="collect-btn" onclick="alert(\"⭐ 收藏成功！可在个人中心查看\")">🔖 收藏</button>';
+  var comment = document.querySelector('#comment');
+  if (comment) comment.before(actions);
+
+  // 底部点赞区域
+  var likeSection = document.createElement('div');
+  likeSection.className = 'article-like-section';
+  likeSection.innerHTML = '<button class="like-button" id="likeButton"><span class="like-icon">♡</span><span>点赞</span><span class="like-count">0</span></button>';
+  if (article) article.after(likeSection);
+  
+  var likeBtn = document.getElementById('likeButton');
+  if (likeBtn) {
+    var count = 0;
+    var liked = false;
+    likeBtn.addEventListener('click', function() {
+      liked = !liked;
+      count += liked ? 1 : -1;
+      likeBtn.classList.toggle('liked', liked);
+      likeBtn.querySelector('.like-icon').textContent = liked ? '♥' : '♡';
+      likeBtn.querySelector('.like-count').textContent = count;
+    });
   }
+}
 
-  // 1. 插入关于我们版块（终极方案：强行插入到文章列表上方）
-  const aboutHTML = `
-    <div class="about-section">
-      <h2>关于我们</h2>
-      <p>民大校园博客是一个专注于校园生活、学习分享、活动记录的开放式平台。我们致力于打造温暖、真实、有价值的校园内容社区，让每一位同学都能在这里记录成长、分享热爱、收获共鸣。</p>
-    </div>
-  `;
+// 修改标题和页脚
+function initThemeText() {
+  var logo = document.querySelector('.logo a');
+  if (logo && logo.innerText !== '民大校园博客') logo.innerText = '民大校园博客';
+  
+  var subtitle = document.querySelector('.subtitle');
+  if (subtitle && subtitle.innerText !== '记录校园生活 · 分享青春故事 · 凝聚民大力量') {
+    subtitle.innerText = '记录校园生活 · 分享青春故事 · 凝聚民大力量';
+  }
+}
 
-  // 尝试所有可能的文章列表容器
-  const containers = [
-    document.querySelector('.content-wrap'),
-    document.querySelector('.post-list'),
-    document.querySelector('.article-list'),
-    document.querySelector('.container'),
-    document.querySelector('main'),
-    document.querySelector('#main')
-  ];
+// 替换登录页Logo
+function initLoginLogo() {
+  var imgs = document.querySelectorAll('img[src*="halo"], img[alt*="Halo"], img[alt*="halo"]');
+  imgs.forEach(function(img) {
+    img.style.display = 'none';
+  });
+  
+  if (document.title && document.title.includes('Halo')) {
+    document.title = '民大校园生活圈 - 登录';
+  }
+}
 
-  for (let container of containers) {
+// 关于我们版块
+function initAboutSection() {
+  var aboutHTML = '<div class="about-section" style="background:#fceee6;padding:20px;margin:20px 0;border-radius:12px;"><h2 style="color:#c45428;">🏫 关于我们</h2><p>民大校园生活圈是一个专注于校园生活、学习分享、活动记录的开放式平台。我们致力于打造温暖、真实、有价值的校园内容社区，让每一位同学都能在这里记录成长、分享热爱、收获共鸣。</p></div>';
+  
+  var containers = ['.content-wrap', '.post-list', '.article-list', '.container', 'main', '#main'];
+  for (var i = 0; i < containers.length; i++) {
+    var container = document.querySelector(containers[i]);
     if (container) {
       container.insertAdjacentHTML('beforebegin', aboutHTML);
       break;
     }
   }
-
-  // 2. 复制分享链接
-  function copyLink() {
-    navigator.clipboard.writeText(window.location.href).then(() => alert("链接已复制！"));
-  }
-
-  // 3. 点赞功能
-  function likePost() { alert("点赞成功！感谢支持～"); }
-
-  // 4. 收藏功能
-  function collectPost() { alert("收藏成功！可在个人中心查看～"); }
-
-  // 5. 模拟文章数据（用于本地搜索）
-  const mockArticles = [
-    { title: "运动会精彩瞬间回顾", content: "本次运动会有短跑、跳远、接力赛等项目，同学们表现出色。" },
-    { title: "校园篮球赛决赛", content: "校队在决赛中以2分险胜，夺得冠军。" },
-    { title: "期末复习指南", content: "各科复习重点和时间规划建议，助你高效备考。" }
-  ];
-
-  // 6. 文章页面自动插入点赞收藏按钮
-  const path = window.location.pathname;
-  if (path !== '/' && !path.includes('/category/') && !path.includes('/tag/')) {
-    const actionDiv = document.createElement('div');
-    actionDiv.className = 'post-actions';
-    actionDiv.innerHTML = `
-      <button class="like-btn" onclick="likePost()">❤️ 点赞</button>
-      <button class="collect-btn" onclick="collectPost()">⭐ 收藏</button>
-    `;
-    const comment = document.querySelector('#comment');
-    if (comment) comment.before(actionDiv);
-  }
-
-  // 7. 修改副标题 + 页脚
-  const logo = document.querySelector('.logo a');
-  if (logo) logo.innerText = "民大校园博客";
-
-  const subtitle = document.querySelector('.subtitle');
-  if (subtitle) subtitle.innerText = "记录校园生活 · 分享青春故事 · 凝聚民大力量";
-
-  const footer = document.querySelector('footer');
-  if (footer) footer.innerText = "© 2026 民大校园博客 | 砖红色校园主题 · 用心打造每一处细节";
-});
-</script>
-
-<style>
-/* 自定义404页面样式 - 民大校园风格 */
-body.error-404 {
-  background: #fceee6 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  margin: 0;
-  font-family: "Microsoft YaHei", sans-serif;
 }
-.error-404-container {
-  text-align: center;
-  padding: 2rem;
-}
-.error-404-logo {
-  width: 120px;
-  margin-bottom: 1.5rem;
-}
-.error-404 h1 {
-  font-size: 6rem;
-  color: #c45428;
-  margin: 0;
-}
-.error-404 p {
-  font-size: 1.2rem;
-  color: #666;
-  margin: 1rem 0 2rem;
-}
-.error-404 .btn-home {
-  display: inline-block;
-  padding: 0.8rem 2rem;
-  background: #c45428;
-  color: white;
-  text-decoration: none;
-  border-radius: 30px;
-  transition: background 0.3s;
-}
-.error-404 .btn-home:hover {
-  background: #a84722;
-}
-</style>
 
-<script>
-// 劫持404页面并注入自定义内容
+// 分享链接功能
+window.copyLink = function() {
+  navigator.clipboard.writeText(window.location.href).then(function() {
+    alert('🔗 链接已复制！');
+  });
+};
+
+// 页面加载完成后执行所有初始化
 document.addEventListener('DOMContentLoaded', function() {
-  if (document.title.includes('404') || document.body.textContent.includes('404')) {
-    document.body.classList.add('error-404');
-    document.body.innerHTML = `
-      <div class="error-404-container">
-        <div class="error-404-logo">🏫</div>
-        <h1>404</h1>
-        <p>哎呀，页面走丢啦！可能是地址输入错误，或者页面已被移除。</p>
-        <a href="/" class="btn-home">返回校园博客首页</a>
-      </div>
-    `;
-  }
+  updateCategoryIntroByURL();
+  initSearch();
+  initReadTime();
+  initColorTags();
+  initPostFeatures();
+  initThemeText();
+  initLoginLogo();
+  initAboutSection();
 });
 </script>
-
-<style>
-/* 自定义登录页面 - 民大校园风格 */
-body.page-login,
-body.login-page,
-body[data-page="login"] {
-  background: linear-gradient(135deg, #fceee6 0%, #fff5f0 100%) !important;
-  min-height: 100vh;
-}
-
-/* 登录卡片 */
-.login-box,
-.card.login,
-.login-card {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 8px 30px rgba(196, 84, 40, 0.15) !important;
-  border: none !important;
-}
-
-/* 登录按钮 */
-.login-btn,
-button[type="submit"].login,
-.btn-login {
-  background: #c45428 !important;
-  border-color: #c45428 !important;
-  color: white !important;
-  border-radius: 8px !important;
-  transition: background 0.3s ease !important;
-}
-.login-btn:hover,
-button[type="submit"].login:hover,
-.btn-login:hover {
-  background: #a84722 !important;
-  border-color: #a84722 !important;
-}
-
-/* 输入框 */
-.login-input,
-.form-control.login,
-input[name="username"],
-input[name="password"] {
-  border-color: #e0e0e0 !important;
-  border-radius: 8px !important;
-}
-.login-input:focus,
-.form-control.login:focus,
-input[name="username"]:focus,
-input[name="password"]:focus {
-  border-color: #c45428 !important;
-  box-shadow: 0 0 0 3px rgba(196, 84, 40, 0.1) !important;
-}
-
-/* 标题文字 */
-.login-title,
-h1.login-header,
-.login-header h1 {
-  color: #c45428 !important;
-}
-</style>
