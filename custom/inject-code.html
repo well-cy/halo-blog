@@ -203,18 +203,6 @@ body.dark .search-input {
   font-weight: bold;
 }
 
-/* 分类介绍文字 */
-.category-intro {
-  background: #fceee6;
-  padding: 20px;
-  text-align: center;
-  color: #c45428;
-  font-size: 15px;
-  position: relative;
-  z-index: 999;
-  display: block !important;
-}
-
 /* 文章点赞 + 收藏按钮 */
 .post-actions {
   display: flex;
@@ -461,6 +449,11 @@ body.login-page {
 .sidebar [class*='popular'] li:nth-child(n+6) {
   display: none !important;
 }
+
+/* ========== 任务2：隐藏分类介绍文字 ========== */
+.category-intro {
+  display: none !important;
+}
 </style>
 
 <!-- 搜索框 -->
@@ -482,35 +475,13 @@ body.login-page {
   <span id="close-notice" onclick="this.parentElement.style.display='none'">×</span>
 </div>
 
-<!-- 分类介绍 -->
-<div class="category-intro" id="categoryIntro">加载中...</div>
+<!-- 分类介绍（已隐藏，见上方CSS） -->
+<div class="category-intro" id="categoryIntro" style="display:none !important;"></div>
 
 <script>
 // 夜间模式
 if (localStorage.getItem('theme') === 'dark') {
   document.body.classList.add('dark');
-}
-
-// 分类介绍
-const categoryDescriptions = {
-  '活动资讯': '活动资讯 | 校园活动、讲座通知一手掌握。',
-  '日常生活': '日常生活 | 记录大学生活点滴。',
-  '社团动态': '社团动态 | 各大社团活动分享。',
-  '学习笔记': '学习笔记 | 干货、复习、经验分享。',
-  '校园新闻': '校园新闻 | 校园大事全收录。'
-};
-
-function updateCategoryIntroByURL() {
-  const introBox = document.getElementById('categoryIntro');
-  if (!introBox) return;
-  const url = window.location.href;
-  let cat = '';
-  if (url.includes('/categories/huo-dong-zi-xun')) cat = '活动资讯';
-  else if (url.includes('/categories/ri-chang-sheng-huo')) cat = '日常生活';
-  else if (url.includes('/categories/she-tuan-dong-tai')) cat = '社团动态';
-  else if (url.includes('/categories/xue-xi-bi-ji')) cat = '学习笔记';
-  else if (url.includes('/categories/xiao-yuan-xin-wen')) cat = '校园新闻';
-  introBox.textContent = categoryDescriptions[cat] || '校园生活分享平台';
 }
 
 // 搜索功能
@@ -692,7 +663,6 @@ window.copyLink = function() {
 
 // 页面加载完成后执行所有初始化
 document.addEventListener('DOMContentLoaded', function() {
-  updateCategoryIntroByURL();
   initSearch();
   initReadTime();
   initColorTags();
@@ -700,5 +670,11 @@ document.addEventListener('DOMContentLoaded', function() {
   initThemeText();
   initLoginLogo();
   initAboutSection();
+  
+  // 强制隐藏分类介绍文字（任务2）
+  var categoryIntro = document.getElementById('categoryIntro');
+  if (categoryIntro) {
+    categoryIntro.style.display = 'none';
+  }
 });
 </script>
