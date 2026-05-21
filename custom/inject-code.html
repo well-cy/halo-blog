@@ -592,3 +592,41 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
+<style>
+/* 隐藏用户中心的Halo Logo图片 */
+.uc-sidebar img[src*="logo"],
+img[alt*="Halo"],
+img[alt*="halo"] {
+  display: none !important;
+}
+</style>
+
+<style>
+/* 强制替换用户中心左上角Halo Logo */
+.uc-sidebar img,
+aside img,
+nav img,
+[class*="sidebar"] img,
+[class*="logo"] img {
+  content: url('/upload/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260429101854_189_4.jpg') !important;
+  width: 80px !important;
+  height: auto !important;
+}
+</style>
+
+<script>
+function replaceUCLogo() {
+  if (!window.location.pathname.startsWith('/uc')) return;
+  document.querySelectorAll('img').forEach(function(img) {
+    var src = img.src || '';
+    if (src.includes('logo-DHe2y1cO')) {
+      img.src = '/upload/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260429101854_189_4.jpg';
+      img.style.width = '40px';
+      img.style.height = 'auto';
+    }
+  });
+}
+setInterval(replaceUCLogo, 500);
+</script>
+
