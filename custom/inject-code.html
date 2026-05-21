@@ -34,11 +34,6 @@
   transition: background 0.3s;
 }
 
-#comment button[type="submit"]:hover {
-  background: #a84722;
-}
-
-/* 评论列表每条评论 */
 #comment .comment-item {
   background: white;
   border-radius: 10px;
@@ -72,6 +67,7 @@
     --primary-light: #fceee6 !important;
 }
 
+/* 链接、按钮、高亮文字 */
 a, .btn-primary, .button-primary, .highlight {
     color: #c45428 !important;
 }
@@ -85,20 +81,22 @@ a, .btn-primary, .button-primary, .highlight {
 }
 
 /* 导航栏强制砖红色 */
-header, 
-.site-header, 
-.header, 
-#header, 
-.navbar, 
-.nav-bar, 
-.top-header, 
-.site-top, 
-.header-wrap, 
+header,
+.site-header,
+.header,
+#header,
+.navbar,
+.nav-bar,
+.top-header,
+.site-top,
+.header-wrap,
 .nav-container,
 .main-header {
     background-color: #c45428 !important;
     border-bottom: none !important;
 }
+
+/* 导航栏文字白色 */
 header a,
 .site-header a,
 .header a,
@@ -111,13 +109,36 @@ header a,
 .main-header a {
     color: #ffffff !important;
 }
+
+/* 导航栏hover效果 */
 header a:hover,
 .site-header a:hover,
 .navbar a:hover {
     color: #fceee6 !important;
 }
 
-/* 悬浮写文章按钮 */
+/* ====================== 导航栏右侧用户头像 ====================== */
+.user-avatar {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #fff;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 9999;
+}
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ====================== 悬浮写文章按钮 ====================== */
 #float-write-btn {
   position: fixed;
   right: 30px;
@@ -162,6 +183,18 @@ header a:hover,
   font-weight: bold;
 }
 
+/* 分类介绍文字 */
+.category-intro {
+  background: #fceee6;
+  padding: 20px;
+  text-align: center;
+  color: #c45428;
+  font-size: 15px;
+  position: relative;
+  z-index: 999;
+  display: block !important;
+}
+
 /* 文章点赞 + 收藏按钮 */
 .post-actions {
   display: flex;
@@ -187,9 +220,9 @@ header a:hover,
 .search-box {
   position: fixed;
   top: 12px;
-  right: 20px;
-  z-index: 9999;
-  width: 240px;
+  right: 12px;
+  z-index: 999999;
+  width: 200px;
   height: 36px;
 }
 .search-input {
@@ -202,15 +235,12 @@ header a:hover,
   font-size: 14px;
   background: #fff;
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 .search-input:focus {
   border-color: #c45428;
   box-shadow: 0 0 0 3px rgba(196,84,40,0.15), 0 0 8px rgba(196,84,40,0.25);
   transform: scale(1.02);
-}
-.search-input:hover {
-  border-color: #ccc;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 .search-icon {
   position: absolute;
@@ -219,43 +249,17 @@ header a:hover,
   transform: translateY(-50%);
   font-size: 14px;
   color: #999;
-  transition: color 0.3s ease;
 }
 .search-input:focus ~ .search-icon {
   color: #c45428;
 }
+
 @media (max-width: 768px) {
-  .search-box {
-    width: 36px;
-    overflow: hidden;
-  }
-  .search-box:hover { width: 160px; }
-  .search-input { opacity: 0; width: 0; border: none; }
-  .search-box:hover .search-input { opacity: 1; width: 100%; }
+  .search-box { width: auto; right: 10px; top: 10px; }
+  .search-input { width: 180px; }
 }
 
-/* 搜索结果高亮、卡片样式 */
-.highlighted, .search-highlight {
-    background-color: #fff3a0 !important;
-    color: #c45428 !important;
-    font-weight: bold !important;
-    padding: 2px 4px;
-    border-radius: 3px;
-}
-.article-item, .post-card, .search-result-item {
-    transition: all 0.3s ease !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-}
-.article-item:hover, .post-card:hover, .search-result-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-.search-result-title {
-    color: #c45428 !important;
-    font-weight: bold !important;
-}
-
+/* 搜索结果 */
 #search-modal {
   display: none;
   position: fixed;
@@ -266,7 +270,7 @@ header a:hover,
   background: white;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  z-index: 9999;
+  z-index: 999999;
   overflow-y: auto;
 }
 #search-modal h3 {
@@ -274,124 +278,383 @@ header a:hover,
   margin: 0;
   background: #fceee6;
   color: #c45428;
-  border-radius: 12px 12px 0 0;
 }
 .search-result-card {
   padding: 12px;
   border-bottom: 1px solid #eee;
 }
-.search-result-card:last-child {
-  border-bottom: none;
-}
-.search-result-card h4 {
-  margin: 0 0 4px;
-  font-size: 14px;
-}
-.search-result-card p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
-/* 阅读时间标签 */
-.read-time-label {
-  display: inline-block;
-  margin-left: 8px;
-  padding: 2px 6px;
-  font-size: 12px;
-  color: #888;
-  background: #f5f5f5;
-  border-radius: 4px;
-  vertical-align: middle;
-
-}
-
-/* 搜索无结果提示 */
 .search-empty-tip {
   padding: 30px 20px;
   text-align: center;
   color: #999;
-  
 }
-.search-empty-tip h4 {
-  margin-bottom: 6px;
+
+/* 阅读时间 */
+.read-time-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 3px 8px;
+  font-size: 12px;
+  color: #fff;
+  background: #c45428;
+  border-radius: 4px;
+}
+
+/* 彩色分类标签 */
+.cat-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  border-radius: 12px;
+  color: #fff;
+}
+.cat-badge.默认分类 { background: #64748b; }
+.cat-badge.活动资讯 { background: #3b82f6; }
+.cat-badge.日常生活 { background: #10b981; }
+.cat-badge.社团动态 { background: #8b5cf6; }
+.cat-badge.学习笔记 { background: #f59e0b; }
+.cat-badge.校园新闻 { background: #ef4444; }
+
+/* AI摘要 */
+.ai-summary-card {
+  display: flex;
+  background: linear-gradient(135deg, #e8f4fd 0%, #d4eafc 100%);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.ai-summary-left-bar {
+  width: 5px;
+  background: #3b82f6;
+  margin-right: 16px;
+}
+.ai-summary-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2563eb;
+}
+.ai-summary-text {
   font-size: 15px;
+  line-height: 1.7;
+}
+
+/* 点赞按钮 */
+.article-like-section {
+  text-align: center;
+  margin: 40px 0;
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+}
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
   color: #666;
 }
-.search-empty-tip p {
-  font-size: 13px;
+.like-button:hover {
+  border-color: #ff6b81;
+  color: #ff6b81;
+}
+.like-button.liked {
+  border-color: #ff6b81;
+  color: #ff6b81;
+  background: #fff5f6;
+}
+
+/* 阅读进度条 */
+.reading-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 10000;
+}
+.reading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #c45428;
+}
+
+/* 文章目录 */
+.article-toc {
+  position: fixed;
+  right: 20px;
+  top: 120px;
+  width: 220px;
+  max-height: calc(100vh - 160px);
+  background: #fff;
+  border-left: 1px solid #eee;
+  padding: 20px;
+  z-index: 100;
+  border-radius: 8px 0 0 8px;
+}
+.toc-link {
+  color: #666;
+  padding: 4px 8px;
+  display: block;
+}
+.toc-item.active .toc-link {
+  color: #c45428;
+  font-weight: bold;
+  border-left: 2px solid #c45428;
+  padding-left: 6px;
+}
+
+/* ====================== 登录页美化（已集成） ====================== */
+body.login-page {
+  background: linear-gradient(135deg, #fceee6 0%, #fff5f0 100%) !important;
+}
+.login-box .logo img {
+  display: none !important;
+}
+.login-box .logo::before {
+  content: "民大校园生活圈" !important;
+  font-size: 26px !important;
+  font-weight: bold !important;
+  color: #c45428 !important;
+}
+.login-btn {
+  background: #c45428 !important;
+  border-color: #c45428 !important;
 }
 </style>
 
-<!-- 搜索框 -->
+<!-- 搜索 -->
 <div class="search-box">
   <span class="search-icon">🔍</span>
   <input type="text" class="search-input" id="halo-search-input" placeholder="搜索文章...">
 </div>
-
-<!-- 搜索弹窗 -->
 <div id="search-modal">
   <h3>📑 搜索结果</h3>
   <div id="search-results-list"></div>
 </div>
 
-<!-- 悬浮按钮 -->
-<button id="float-write-btn" onclick="window.open('/console/#/editor/posts', '_blank')">✏️</button>
+<!-- 写文章按钮（已修复地址） -->
+<button id="float-write-btn" onclick="location.href='/console/posts/editor'">✏️</button>
 
-<!-- 顶部公告 -->
+<!-- 公告 -->
 <div id="top-notice-bar">
-  📢 校园博客欢迎你！分享学习、生活、趣事都可以投稿～
+  📢 校园博客观迎你！分享学习、生活、趣事都可以投稿～
   <span id="close-notice" onclick="document.getElementById('top-notice-bar').style.display='none'">×</span>
 </div>
 
+<!-- 分类介绍 -->
+<div class="category-intro" id="categoryIntro">加载中...</div>
+
 <script>
-// 点赞收藏
-function copyLink(){}
-function likePost(){alert("点赞成功！")}
-function collectPost(){alert("收藏成功！")}
+// 分类介绍
+const categoryDescriptions = {
+  '活动资讯':'活动资讯 | 校园活动、讲座通知一手掌握。',
+  '日常生活':'日常生活 | 记录大学生活点滴。',
+  '社团动态':'社团动态 | 各大社团活动分享。',
+  '学习笔记':'学习笔记 | 干货、复习、经验分享。',
+  '校园新闻':'校园新闻 | 校园大事全收录。'
+};
+function updateCategoryIntroByURL(){
+  const introBox = document.getElementById('categoryIntro');
+  if(!introBox) return;
+  const url = window.location.href;
+  let cat = '';
+  if(url.includes('/categories/huo-dong-zi-xun')) cat='活动资讯';
+  else if(url.includes('/categories/ri-chang-sheng-huo')) cat='日常生活';
+  else if(url.includes('/categories/she-tuan-dong-tai')) cat='社团动态';
+  else if(url.includes('/categories/xue-xi-bi-ji')) cat='学习笔记';
+  else if(url.includes('/categories/xiao-yuan-xin-wen')) cat='校园新闻';
+  introBox.textContent = categoryDescriptions[cat] || '校园生活分享平台';
+}
+document.addEventListener('DOMContentLoaded',updateCategoryIntroByURL);
 
-// ========== 你的真实文章：标题 + slug别名（改成你自己真实文章）==========
-const mockArticles = [
-  { title: "运动会精彩瞬间回顾", slug: "sports-meet", content: "本次运动会有短跑、跳远、接力赛等项目。" },
-  { title: "校园篮球赛决赛", slug: "basketball-final", content: "校队在决赛中以2分险胜夺冠。" },
-  { title: "期末复习指南", slug: "exam-review", content: "各科复习重点和时间规划建议。" }
-];
-
-document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById('halo-search-input');
-  const searchModal = document.getElementById('search-modal');
-  const resultsList = document.getElementById('search-results-list');
-
-  searchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      const keyword = this.value.trim();
-      resultsList.innerHTML = '';
-      if(!keyword){searchModal.style.display='none';return;}
-      const res = mockArticles.filter(x=>x.title.includes(keyword)||x.content.includes(keyword));
-      
-      if(res.length===0){
-        resultsList.innerHTML = `<div class="search-empty-tip"><h4>😶‍🌫️ 暂无搜索结果</h4><p>换个关键词试试吧～</p></div>`;
-      }else{
-        res.forEach(art=>{
-          let t = art.title.replace(new RegExp(keyword,'g'),`<span class="highlighted">${keyword}</span>`);
-          let c = art.content.replace(new RegExp(keyword,'g'),`<span class="highlighted">${keyword}</span>`);
-          // 关键：加a标签 → Halo真实文章链接 /archives/xxx
-          resultsList.innerHTML += `
-            <div class="search-result-card">
-              <h4><a href="/archives/${art.slug}" target="_blank">${t}</a> <span class="read-time-label">阅读约1分钟</span></h4>
-              <p>${c}</p>
-            </div>
-          `;
-        });
-      }
-      searchModal.style.display = 'block';
+// 搜索
+document.addEventListener('DOMContentLoaded',function(){
+  const input = document.getElementById('halo-search-input');
+  const modal = document.getElementById('search-modal');
+  const list = document.getElementById('search-results-list');
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+      const kw = input.value.trim().toLowerCase();
+      if(!kw){modal.style.display='none';return;}
+      const results = [];
+      document.querySelectorAll('a').forEach(link=>{
+        if(link.href.includes('/archives/')&&link.innerText.toLowerCase().includes(kw)){
+          results.push({title:link.innerText,url:link.href});
+        }
+      });
+      list.innerHTML = results.length===0
+        ? '<div class="search-empty-tip"><h4>暂无结果</h4></div>'
+        : results.map(i=>`<div class="search-result-card"><h4><a href="${i.url}" target="_blank">${i.title}</a></h4></div>`).join('');
+      modal.style.display='block';
     }
   });
-
   document.addEventListener('click',e=>{
-    if(!searchInput.contains(e.target)&&!searchModal.contains(e.target)){
-      searchModal.style.display='none';
-    }
+    if(!input.contains(e.target)&&!modal.contains(e.target)) modal.style.display='none';
+  });
+});
+
+// 阅读时间
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{
+    document.querySelectorAll('.post-card,.article-item').forEach(card=>{
+      const t = card.textContent.trim();
+      if(t.length<50) return;
+      const min = Math.max(1,Math.ceil(t.length/400));
+      const b = document.createElement('div');
+      b.className='read-time-badge';
+      b.textContent=min+' 分钟';
+      card.appendChild(b);
+    });
+  },1000);
+});
+
+// 彩色标签
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{
+    const cats=['活动资讯','日常生活','社团动态','学习笔记','校园新闻','默认分类'];
+    document.querySelectorAll('.post-card,.article-item').forEach(card=>{
+      const w = document.createTreeWalker(card,NodeFilter.SHOW_TEXT);
+      let n;
+      while(n=w.nextNode()){
+        const t = n.textContent.trim();
+        if(cats.includes(t)){
+          const s = document.createElement('span');
+          s.className=`cat-badge ${t}`;
+          s.textContent=t;
+          n.parentNode.replaceChild(s,n);
+          break;
+        }
+      }
+    });
+  },2000);
+});
+
+// 文章页功能
+document.addEventListener('DOMContentLoaded',()=>{
+  const isPost = location.pathname.startsWith('/archives/');
+  if(!isPost) return;
+
+  // 进度条
+  const p = document.createElement('div');
+  p.className='reading-progress-container';
+  p.innerHTML='<div class="reading-progress-bar" id="readingProgressBar"></div>';
+  document.body.prepend(p);
+  window.addEventListener('scroll',()=>{
+    const b = document.getElementById('readingProgressBar');
+    if(!b) return;
+    const top = window.pageYOffset;
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    b.style.width = h>0 ? (top/h)*100 + '%' : '0%';
+  });
+
+  // AI摘要
+  const ai = document.createElement('div');
+  ai.className='ai-summary-card';
+  ai.innerHTML=`<div class="ai-summary-left-bar"></div><div class="ai-summary-content"><div class="ai-summary-label">AI 摘要</div><p class="ai-summary-text">本文为校园生活分享内容，欢迎阅读～</p></div>`;
+  const article = document.querySelector('article,.post-content,.article-content');
+  if(article) article.before(ai);
+
+  // 目录
+  const toc = document.createElement('nav');
+  toc.className='article-toc';
+  toc.innerHTML=`<div class="toc-title">文章目录</div><ul class="toc-list"><li class="toc-item active"><a class="toc-link" href="#title">文章标题</a></li><li class="toc-item"><a class="toc-link" href="#content">正文内容</a></li></ul>`;
+  document.body.appendChild(toc);
+
+  // 点赞收藏
+  const act = document.createElement('div');
+  act.className='post-actions';
+  act.innerHTML=`<button class="like-btn" onclick="alert('点赞成功')">❤️ 点赞</button><button class="collect-btn" onclick="alert('收藏成功')">⭐ 收藏</button>`;
+  const cmt = document.querySelector('#comment');
+  if(cmt) cmt.before(act);
+
+  // 底部点赞
+  const likeSection = document.createElement('div');
+  likeSection.className='article-like-section';
+  likeSection.innerHTML=`<button class="like-button" id="likeButton"><span class="like-icon">♡</span><span>点赞</span><span class="like-count">0</span></button>`;
+  if(article) article.after(likeSection);
+  
+  const btn = document.getElementById('likeButton');
+  if(btn){
+    let count=0;
+    let liked=false;
+    btn.addEventListener('click',()=>{
+      liked=!liked;
+      count+=liked?1:-1;
+      btn.classList.toggle('liked',liked);
+      btn.querySelector('.like-icon').textContent=liked?'♥':'♡';
+      btn.querySelector('.like-count').textContent=count;
+    });
+  }
+});
+
+// 修改登录页标题
+document.addEventListener('DOMContentLoaded',()=>{
+  if(document.title.includes('Halo')){
+    document.title='民大校园生活圈 - 登录';
+  }
+});
+</script>
+
+<style>
+/* 隐藏登录页Halo Logo */
+.login-logo, .auth-logo img, 
+[class*="login"] img,
+[class*="auth"] img {
+  display: none !important;
+}
+</style>
+
+<script>
+// 替换登录页Logo
+document.addEventListener('DOMContentLoaded', function() {
+  const imgs = document.querySelectorAll('img[src*="halo"], img[alt*="Halo"], img[alt*="halo"]');
+  imgs.forEach(img => {
+    img.src = '/path/to/your-logo.png'; // 换成你们上传到附件的Logo地址
+    img.alt = '民大校园生活圈';
   });
 });
 </script>
+
+<style>
+/* 隐藏用户中心的Halo Logo图片 */
+.uc-sidebar img[src*="logo"],
+img[alt*="Halo"],
+img[alt*="halo"] {
+  display: none !important;
+}
+</style>
+
+<style>
+/* 强制替换用户中心左上角Halo Logo */
+.uc-sidebar img,
+aside img,
+nav img,
+[class*="sidebar"] img,
+[class*="logo"] img {
+  content: url('/upload/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260429101854_189_4.jpg') !important;
+  width: 80px !important;
+  height: auto !important;
+}
+</style>
+
+<script>
+function replaceUCLogo() {
+  if (!window.location.pathname.startsWith('/uc')) return;
+  document.querySelectorAll('img').forEach(function(img) {
+    var src = img.src || '';
+    if (src.includes('logo-DHe2y1cO')) {
+      img.src = '/upload/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260429101854_189_4.jpg';
+      img.style.width = '40px';
+      img.style.height = 'auto';
+    }
+  });
+}
+setInterval(replaceUCLogo, 500);
+</script>
+
