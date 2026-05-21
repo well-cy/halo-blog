@@ -442,14 +442,6 @@ body.login-page {
   display: none !important;
 }
 
-/* 热门文章只显示前5篇 */
-.widget_popular_posts li:nth-child(n+6),
-[class*='popular-posts'] li:nth-child(n+6),
-.popular-posts li:nth-child(n+6),
-.sidebar [class*='popular'] li:nth-child(n+6) {
-  display: none !important;
-}
-
 /* ========== 任务2：隐藏分类介绍文字 ========== */
 .category-intro {
   display: none !important;
@@ -654,6 +646,45 @@ function initAboutSection() {
   }
 }
 
+// ========== 任务5：强制热门文章只显示前5篇 ==========
+function limitPopularPosts() {
+  setTimeout(function() {
+    // 方法1：通过CSS选择器隐藏
+    var selectors = [
+      '.sidebar ul li:nth-child(n+6)',
+      'aside ul li:nth-child(n+6)',
+      '[class*="popular"] li:nth-child(n+6)',
+      '[class*="Popular"] li:nth-child(n+6)',
+      '.widget_popular_posts li:nth-child(n+6)',
+      '.popular-posts li:nth-child(n+6)',
+      '.sidebar-widget-popular li:nth-child(n+6)'
+    ];
+    
+    selectors.forEach(function(selector) {
+      var elements = document.querySelectorAll(selector);
+      elements.forEach(function(el) {
+        el.style.display = 'none';
+      });
+    });
+    
+    // 方法2：找到热门文章区域，直接隐藏第6条及以后的li
+    var allSidebars = document.querySelectorAll('.sidebar, aside, [class*="sidebar"], [class*="widget"]');
+    allSidebars.forEach(function(sidebar) {
+      var lists = sidebar.querySelectorAll('ul');
+      lists.forEach(function(list) {
+        // 检查是否包含热门文章相关文字
+        var parentText = (list.parentElement ? list.parentElement.innerText : '');
+        if (parentText.includes('热门') || parentText.includes('popular') || parentText.includes('Popular')) {
+          var items = list.querySelectorAll('li');
+          for (var i = 5; i < items.length; i++) {
+            if (items[i]) items[i].style.display = 'none';
+          }
+        }
+      });
+    });
+  }, 500);
+}
+
 // 分享链接功能
 window.copyLink = function() {
   navigator.clipboard.writeText(window.location.href).then(function() {
@@ -670,6 +701,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initThemeText();
   initLoginLogo();
   initAboutSection();
+  limitPopularPosts();  // 任务5：限制热门文章
   
   // 强制隐藏分类介绍文字（任务2）
   var categoryIntro = document.getElementById('categoryIntro');
