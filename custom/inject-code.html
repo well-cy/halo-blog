@@ -65,6 +65,7 @@
     --primary-color: #c45428 !important;
     --primary-hover: #a84722 !important;
     --primary-light: #fceee6 !important;
+    --like-color: #ff6b81;
 }
 
 /* 链接、按钮、高亮文字 */
@@ -167,25 +168,9 @@ header a,
   display: block !important;
 }
 
-/* 文章点赞 + 收藏按钮 */
+/* 隐藏重复的点赞收藏按钮 */
 .post-actions {
-  display: flex;
-  gap: 12px;
-  margin: 20px 0;
-}
-.like-btn, .collect-btn {
-  padding: 10px 18px;
-  border-radius: 30px;
-  border: none;
-  background: #c45428;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.like-btn:hover, .collect-btn:hover {
-  background: #a84722;
-  transform: scale(1.05);
+  display: none !important;
 }
 
 /* 搜索框样式（修复移动端问题） */
@@ -397,14 +382,16 @@ header a,
   margin: 0;
 }
 
-/* 点赞按钮 */
-.article-like-section {
-  text-align: center;
+/* 点赞/收藏按钮区域 */
+.article-action-section {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
   margin: 40px 0;
   padding: 20px 0;
   border-top: 1px solid #eee;
 }
-.like-button {
+.action-button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -419,18 +406,23 @@ header a,
   outline: none;
 }
 .like-button:hover {
-  border-color: #ff6b81;
-  color: #ff6b81;
+  border-color: var(--like-color);
+  color: var(--like-color);
   box-shadow: 0 2px 12px rgba(255, 107, 129, 0.15);
 }
-.like-icon {
+.collect-button:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  box-shadow: 0 2px 12px rgba(196, 84, 40, 0.15);
+}
+.action-icon {
   font-size: 20px;
   transition: transform 0.3s ease;
 }
-.like-text {
+.action-text {
   font-weight: 500;
 }
-.like-count {
+.action-count {
   font-weight: 600;
   margin-left: 2px;
 }
@@ -443,15 +435,23 @@ header a,
   100% { transform: scale(1); }
 }
 .like-button.liked {
-  border-color: #ff6b81;
-  color: #ff6b81;
+  border-color: var(--like-color);
+  color: var(--like-color);
   background: #fff5f6;
 }
-.like-button.liked .like-icon {
-  color: #ff6b81;
+.like-button.liked .action-icon {
+  color: var(--like-color);
 }
-.like-button.bouncing .like-icon {
+.like-button.bouncing .action-icon {
   animation: likeBounce 0.5s ease;
+}
+.collect-button.collected {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: var(--primary-light);
+}
+.collect-button.collected .action-icon {
+  color: var(--primary-color);
 }
 
 /* 阅读进度条 */
@@ -567,6 +567,41 @@ header a,
 </div>
 
 <script>
+// AI摘要接口函数（增加超时和错误处理）
+async function generateAISummary(content) {
+  const API_KEY = 'sk-838ca294a7644336961604339f57c63a';
+  const prompt = `请用不超过100字提炼以下文章的核心观点，生成一段简洁流畅的摘要：\n\n${content}`;
+  
+  // 增加超时处理
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10秒超时
+
+  try {
+    const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json',
+        'Authorization':'Bearer '+API_KEY
+      },
+      body: JSON.stringify({
+        model:'deepseek-chat',
+        messages:[{role:'user',content:prompt}]
+      }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    
+    if (!res.ok) throw new Error('API请求失败');
+    const data = await res.json();
+    return data.choices?.[0]?.message?.content || '摘要生成失败';
+  } catch(e){
+    clearTimeout(timeoutId);
+    console.error('AI摘要生成失败:', e);
+    if (e.name === 'AbortError') return '请求超时，请稍后再试';
+    return '摘要生成失败';
+  }
+}
+
 // 1. 每个分类的专属介绍文案
 const categoryDescriptions = {
   '活动资讯': '活动资讯 | 校园活动、讲座通知、赛事动态一手掌握。',
@@ -698,8 +733,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function copyLink() {
   navigator.clipboard.writeText(window.location.href).then(() => alert('链接已复制！'));
 }
-function likePost() { alert("点赞成功！感谢支持～"); }
-function collectPost() { alert("收藏成功！快去个人中心查看吧～"); }
 
 document.addEventListener('DOMContentLoaded', function() {
   const isPostPage = window.location.pathname.startsWith('/archives/');
@@ -714,18 +747,25 @@ document.addEventListener('DOMContentLoaded', function() {
     if(articleTitle) articleTitle.id = "article-title-wrap";
     if(articleMain) articleMain.id = "article-content-wrap";
 
-    const aiCard = document.createElement('div');
-    aiCard.className = 'ai-summary-card';
-    aiCard.id = 'ai-summary-wrap';
-    aiCard.innerHTML = `
-      <div class="ai-summary-left-bar"></div>
-      <div class="ai-summary-content">
-        <div class="ai-summary-label">AI 摘要</div>
-        <p class="ai-summary-text">这是一段示例摘要内容，用于展示AI摘要生成功能。</p>
-      </div>
-    `;
-    const article = document.querySelector('article, .post, .article-content');
-    if (article) article.parentNode.insertBefore(aiCard, article);
+    // 关键修改：复用已有的AI摘要卡片，不新增
+    setTimeout(async () => {
+      // 找到已有的AI摘要卡片（只取第一个）
+      const existingAICard = document.querySelector('.ai-summary-card');
+      if (existingAICard) {
+        const articleContent = articleMain ? articleMain.innerText.replace(/\s+/g, ' ').trim() : '';
+        const textEl = existingAICard.querySelector('.ai-summary-text');
+        
+        // 先显示加载状态
+        if (textEl) textEl.textContent = '正在生成摘要...';
+
+        if (articleContent.length > 0) {
+          const summary = await generateAISummary(articleContent);
+          if (textEl) textEl.textContent = summary;
+        } else {
+          if (textEl) textEl.textContent = "暂无内容摘要";
+        }
+      }
+    }, 500);
 
     const toc = document.createElement('nav');
     toc.className = 'article-toc';
@@ -734,57 +774,90 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="toc-title">文章目录</div>
       <ul class="toc-list">
         <li class="toc-item active"><a href="#article-title-wrap" class="toc-link">文章标题</a></li>
-        <li class="toc-item"><a href="#ai-summary-wrap" class="toc-link">AI摘要</a></li>
         <li class="toc-item"><a href="#article-content-wrap" class="toc-link">文章正文</a></li>
       </ul>
     `;
     document.body.appendChild(toc);
 
-    const likeSection = document.createElement('div');
-    likeSection.className = 'article-like-section';
-    likeSection.innerHTML = `
-      <button class="like-button" id="likeButton">
-        <span class="like-icon">♡</span>
-        <span class="like-text">点赞</span>
-        <span class="like-count" id="likeCount">0</span>
+    // 新增点赞+收藏按钮区域
+    const actionSection = document.createElement('div');
+    actionSection.className = 'article-action-section';
+    actionSection.innerHTML = `
+      <button class="action-button like-button" id="likeButton">
+        <span class="action-icon">♡</span>
+        <span class="action-text">点赞</span>
+        <span class="action-count" id="likeCount">0</span>
+      </button>
+      <button class="action-button collect-button" id="collectButton">
+        <span class="action-icon">☆</span>
+        <span class="action-text">收藏</span>
+        <span class="action-count" id="collectCount">0</span>
       </button>
     `;
-    if (article) article.after(likeSection);
+    if (articleMain) articleMain.after(actionSection);
   }
 
-  if (isPostPage) {
-    const actionDiv = document.createElement('div');
-    actionDiv.className = 'post-actions';
-    actionDiv.innerHTML = `
-      <button class="like-btn" onclick="likePost()">❤️ 点赞</button>
-      <button class="collect-btn" onclick="collectPost()">⭐ 收藏</button>
-    `;
-    const comment = document.querySelector('#comment');
-    if (comment) comment.before(actionDiv);
-  }
-
+  // 点赞功能（同步到页面顶部）
   const likeButton = document.getElementById('likeButton');
-  if (likeButton) {
+  const collectButton = document.getElementById('collectButton');
+  if (likeButton && collectButton) {
     const likeCount = document.getElementById('likeCount');
-    const likeIcon = likeButton.querySelector('.like-icon');
-    let isLiked = false;
-    let count = parseInt(likeCount.textContent) || 0;
+    const collectCount = document.getElementById('collectCount');
+    const likeIcon = likeButton.querySelector('.action-icon');
+    const collectIcon = collectButton.querySelector('.action-icon');
 
-    likeButton.addEventListener('click', function() {
-      if (!isLiked) {
-        isLiked = true;
-        count++;
-        likeButton.classList.add('liked');
-        likeIcon.textContent = '♥';
-        likeButton.classList.add('bouncing');
-        setTimeout(() => likeButton.classList.remove('bouncing'), 500);
-      } else {
-        isLiked = false;
-        count--;
-        likeButton.classList.remove('liked');
-        likeIcon.textContent = '♡';
+    // 从本地存储读取状态
+    const articleId = location.pathname;
+    if (!localStorage.getItem('articleLikes')) localStorage.setItem('articleLikes', '{}');
+    if (!localStorage.getItem('articleCollects')) localStorage.setItem('articleCollects', '{}');
+    const likes = JSON.parse(localStorage.getItem('articleLikes'));
+    const collects = JSON.parse(localStorage.getItem('articleCollects'));
+    let isLiked = !!likes[articleId];
+    let likeCountVal = likes[articleId] || 0;
+    let isCollected = !!collects[articleId];
+    let collectCountVal = collects[articleId] || 0;
+
+    // 页面顶部点赞元素
+    const topLikeElement = document.querySelector('.post-header .like, .post-header [aria-label*="点赞"], .post-header [class*="like"]');
+
+    function updateLikeUI() {
+      likeCount.textContent = likeCountVal;
+      likeIcon.textContent = isLiked ? '♥' : '♡';
+      likeButton.classList.toggle('liked', isLiked);
+      if (topLikeElement) {
+        topLikeElement.textContent = likeCountVal;
+        topLikeElement.classList.toggle('liked', isLiked);
       }
-      likeCount.textContent = count;
+    }
+
+    function updateCollectUI() {
+      collectCount.textContent = collectCountVal;
+      collectIcon.textContent = isCollected ? '★' : '☆';
+      collectButton.classList.toggle('collected', isCollected);
+    }
+
+    // 初始化UI
+    updateLikeUI();
+    updateCollectUI();
+
+    // 点赞事件
+    likeButton.addEventListener('click', function() {
+      isLiked = !isLiked;
+      likeCountVal += isLiked ? 1 : -1;
+      likes[articleId] = likeCountVal;
+      localStorage.setItem('articleLikes', JSON.stringify(likes));
+      likeButton.classList.add('bouncing');
+      setTimeout(() => likeButton.classList.remove('bouncing'), 500);
+      updateLikeUI();
+    });
+
+    // 收藏事件
+    collectButton.addEventListener('click', function() {
+      isCollected = !isCollected;
+      collectCountVal += isCollected ? 1 : -1;
+      collects[articleId] = collectCountVal;
+      localStorage.setItem('articleCollects', JSON.stringify(collects));
+      updateCollectUI();
     });
   }
 
@@ -817,7 +890,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 100);
 
   window.addEventListener('scroll', function() {
-    const sections = document.querySelectorAll('#article-title-wrap,#ai-summary-wrap,#article-content-wrap');
+    const sections = document.querySelectorAll('#article-title-wrap,#article-content-wrap');
     const items = document.querySelectorAll('.toc-item');
     const scrollY = window.pageYOffset;
     let curr = '';
