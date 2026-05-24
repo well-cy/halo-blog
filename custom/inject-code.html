@@ -96,7 +96,7 @@ header,
     border-bottom: none !important;
 }
 
-/* 导航栏文字白色 */
+/* 导航栏文字白色（默认） */
 header a,
 .site-header a,
 .header a,
@@ -115,6 +115,53 @@ header a:hover,
 .site-header a:hover,
 .navbar a:hover {
     color: #fceee6 !important;
+}
+
+/* ========== 修复登录/退出登录按钮文字颜色（白天模式黑色） ========== */
+/* 登录按钮相关链接显示为黑色 */
+header a[href*="login"],
+.site-header a[href*="login"],
+.header a[href*="login"],
+.navbar a[href*="login"],
+.nav-bar a[href*="login"],
+header a[href*="console"],
+.site-header a[href*="console"],
+/* 退出登录按钮 */
+header a[href*="logout"],
+.site-header a[href*="logout"],
+.navbar a[href*="logout"],
+/* 包含退出登录文字的链接 */
+header a:has(span),
+.navbar a:has(span) {
+    color: #000000 !important;
+    font-weight: 500 !important;
+}
+
+/* 如果登录按钮是按钮元素 */
+.login-btn,
+button[onclick*="login"],
+[class*="login-btn"] {
+    color: #000000 !important;
+    background: #ffffff !important;
+}
+
+/* 导航栏右侧区域（登录/注册/控制台/退出登录）统一黑色 */
+header .right a,
+.site-header .right a,
+.navbar .right a,
+header .user-menu a,
+.navbar .user-menu a {
+    color: #000000 !important;
+}
+
+/* 夜间模式适配 - 登录/退出登录按钮在夜间模式下显示为白色 */
+body.dark header a[href*="login"],
+body.dark .site-header a[href*="login"],
+body.dark .navbar a[href*="login"],
+body.dark header a[href*="logout"],
+body.dark .site-header a[href*="logout"],
+body.dark .navbar a[href*="logout"] {
+    color: #ffffff !important;
 }
 
 /* 夜间模式适配 */
@@ -442,14 +489,6 @@ body.login-page {
   display: none !important;
 }
 
-/* 热门文章只显示前5篇 */
-.widget_popular_posts li:nth-child(n+6),
-[class*='popular-posts'] li:nth-child(n+6),
-.popular-posts li:nth-child(n+6),
-.sidebar [class*='popular'] li:nth-child(n+6) {
-  display: none !important;
-}
-
 /* ========== 任务2：隐藏分类介绍文字 ========== */
 .category-intro {
   display: none !important;
@@ -654,6 +693,58 @@ function initAboutSection() {
   }
 }
 
+// ========== 修复登录/退出登录按钮颜色 ==========
+function fixAuthButtonColor() {
+  // 查找所有包含"登录"或"退出"文字的链接
+  var allLinks = document.querySelectorAll('a, span, div');
+  allLinks.forEach(function(el) {
+    var text = el.innerText;
+    if (text === '登录' || text === '退出登录' || (text && text.includes('退出'))) {
+      el.style.color = '#000000';
+      el.style.fontWeight = '500';
+    }
+  });
+}
+
+// ========== 任务5：强制热门文章只显示前5篇 ==========
+function limitPopularPosts() {
+  setTimeout(function() {
+    // 方法1：通过CSS选择器隐藏
+    var selectors = [
+      '.sidebar ul li:nth-child(n+6)',
+      'aside ul li:nth-child(n+6)',
+      '[class*="popular"] li:nth-child(n+6)',
+      '[class*="Popular"] li:nth-child(n+6)',
+      '.widget_popular_posts li:nth-child(n+6)',
+      '.popular-posts li:nth-child(n+6)',
+      '.sidebar-widget-popular li:nth-child(n+6)'
+    ];
+    
+    selectors.forEach(function(selector) {
+      var elements = document.querySelectorAll(selector);
+      elements.forEach(function(el) {
+        el.style.display = 'none';
+      });
+    });
+    
+    // 方法2：找到热门文章区域，直接隐藏第6条及以后的li
+    var allSidebars = document.querySelectorAll('.sidebar, aside, [class*="sidebar"], [class*="widget"]');
+    allSidebars.forEach(function(sidebar) {
+      var lists = sidebar.querySelectorAll('ul');
+      lists.forEach(function(list) {
+        // 检查是否包含热门文章相关文字
+        var parentText = (list.parentElement ? list.parentElement.innerText : '');
+        if (parentText.includes('热门') || parentText.includes('popular') || parentText.includes('Popular')) {
+          var items = list.querySelectorAll('li');
+          for (var i = 5; i < items.length; i++) {
+            if (items[i]) items[i].style.display = 'none';
+          }
+        }
+      });
+    });
+  }, 500);
+}
+
 // 分享链接功能
 window.copyLink = function() {
   navigator.clipboard.writeText(window.location.href).then(function() {
@@ -670,6 +761,8 @@ document.addEventListener('DOMContentLoaded', function() {
   initThemeText();
   initLoginLogo();
   initAboutSection();
+  limitPopularPosts();  // 任务5：限制热门文章
+  fixAuthButtonColor(); // 修复登录/退出登录按钮颜色
   
   // 强制隐藏分类介绍文字（任务2）
   var categoryIntro = document.getElementById('categoryIntro');
