@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< feature/deploy
+  <title>我的校园博客 | 民大清新主题</title>
+  <style>
+    /* 民大红色主色调配色变量 */
+    :root {
+      --primary-color: #C8102E;    /* 主色：民大红 */
+      --secondary-color: #F5F5F5;  /* 辅助色：浅灰背景 */
+      --text-color: #333333;       /* 正文色：深灰 */
+      --light-text: #666666;       /* 次要文字色：中灰 */
+      --bg-color: #FFFFFF;         /* 背景色：纯白 */
+=======
   <title>我的校园博客</title>
   <style>
     /* 校园清新风格配色变量 */
@@ -12,6 +23,7 @@
       --text-color: #333333;       /* 正文色：深灰，保证可读性 */
       --light-text: #666666;       /* 次要文字色：中灰 */
       --bg-color: #F8FAFC;         /* 背景色：米白，不刺眼 */
+>>>>>>> main
       --card-bg: #FFFFFF;          /* 卡片背景：纯白 */
       --border-color: #E2E8F0;     /* 边框色：浅灰 */
     }
@@ -25,12 +37,27 @@
       padding: 0;
     }
 
+<<<<<<< feature/deploy
+    /* 头部导航栏（Logo+副标题+用户头像） */
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-left {
+      text-align: left;
+=======
     /* 头部导航栏（Logo+副标题） */
     header {
       background-color: var(--card-bg);
       border-bottom: 1px solid var(--border-color);
       padding: 20px;
       text-align: center;
+>>>>>>> main
     }
 
     /* Logo文字 */
@@ -48,6 +75,23 @@
       margin: 8px 0 0;
     }
 
+<<<<<<< feature/deploy
+    /* 用户头像入口 */
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+=======
+>>>>>>> main
     /* 轮播图容器 */
     .carousel {
       width: 100%;
@@ -65,6 +109,175 @@
       object-fit: cover;
     }
 
+<<<<<<< feature/deploy
+    /* 主体内容区（主内容+侧边栏布局） */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 30px;
+    }
+
+    /* 博客内容区 */
+    .blog-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 大卡片样式 */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-cover {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin: 0 0 10px;
+    }
+
+    .card-excerpt {
+      color: var(--light-text);
+      line-height: 1.6;
+      margin: 0 0 15px;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #94A3B8;
+      font-size: 14px;
+    }
+
+    /* 侧边栏 */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* 侧边栏通用模块样式 */
+    .sidebar-module {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .module-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin: 0 0 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 热门文章排行榜 */
+    .hot-article-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .hot-article-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .rank-number {
+      width: 24px;
+      height: 24px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .hot-article-title {
+      font-size: 14px;
+      color: var(--text-color);
+      text-decoration: none;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* 最新评论模块 */
+    .latest-comment-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .latest-comment-item {
+      margin-bottom: 15px;
+    }
+
+    .comment-author {
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin: 0 0 5px;
+    }
+
+    .comment-content {
+      font-size: 13px;
+      color: var(--light-text);
+      margin: 0;
+    }
+
+    /* 关于我们版块 */
+    .about-section {
+      background-color: var(--secondary-color);
+      padding: 40px 20px;
+      margin: 50px 0;
+      border-radius: 12px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .about-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--text-color);
+      line-height: 1.8;
+      text-align: center;
+=======
     /* 文章卡片 */
     .container {
       max-width: 1200px;
@@ -87,6 +300,7 @@
 
     .card p {
       color: var(--light-text);
+>>>>>>> main
     }
 
     /* 页脚信息 */
@@ -105,10 +319,22 @@
   </style>
 </head>
 <body>
+<<<<<<< feature/deploy
+  <!-- 头部：Logo + 副标题 + 用户头像 -->
+  <header>
+    <div class="header-left">
+      <h1 class="site-logo">✨ 民大校园博客</h1>
+      <p class="site-subtitle">记录民大生活 · 分享学习点滴 · 留下青春印记</p>
+    </div>
+    <div class="user-avatar">
+      我
+    </div>
+=======
   <!-- 头部：Logo + 副标题 -->
   <header>
     <h1 class="site-logo">✨ 我的校园博客</h1>
     <p class="site-subtitle">记录校园生活 · 分享学习点滴 · 留下青春印记</p>
+>>>>>>> main
   </header>
 
   <!-- 轮播图模块 -->
@@ -116,6 +342,74 @@
     <img src="https://picsum.photos/1200/400?random=1" alt="校园活动轮播图">
   </div>
 
+<<<<<<< feature/deploy
+  <!-- 主体内容区（主内容+侧边栏） -->
+  <div class="main-container">
+    <!-- 博客内容区 -->
+    <div class="blog-content">
+      <!-- 文章卡片1 -->
+      <div class="card">
+        <img class="card-cover" src="https://picsum.photos/800/400?random=2" alt="文章封面">
+        <div class="card-content">
+          <h3 class="card-title">民大校园生活分享</h3>
+          <p class="card-excerpt">记录在图书馆泡馆的日子，分享高效复习方法和心态调整技巧...</p>
+          <div class="card-meta">
+            <span>发布时间：2026-05-07</span>
+            <span>作者：NiuYimin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+      <!-- 热门文章排行榜模块 -->
+      <div class="sidebar-module">
+        <h3 class="module-title">🔥 热门文章</h3>
+        <ul class="hot-article-list">
+          <li class="hot-article-item">
+            <span class="rank-number">1</span>
+            <a href="#" class="hot-article-title">期末复习指南：各科重点梳理</a>
+          </li>
+          <li class="hot-article-item">
+            <span class="rank-number">2</span>
+            <a href="#" class="hot-article-title">民大食堂美食测评合集</a>
+          </li>
+          <li class="hot-article-item">
+            <span class="rank-number">3</span>
+            <a href="#" class="hot-article-title">校园生活分享：图书馆学习日常</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 最新评论模块 -->
+      <div class="sidebar-module">
+        <h3 class="module-title">💬 最新评论</h3>
+        <ul class="latest-comment-list">
+          <li class="latest-comment-item">
+            <p class="comment-author">小A</p>
+            <p class="comment-content">写得太实用了，已经收藏！</p>
+          </li>
+          <li class="latest-comment-item">
+            <p class="comment-author">小B</p>
+            <p class="comment-content">食堂测评好详细，下次去试试！</p>
+          </li>
+          <li class="latest-comment-item">
+            <p class="comment-author">小C</p>
+            <p class="comment-content">图书馆学习日常很有共鸣！</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 关于我们版块 -->
+  <div class="about-section">
+    <h2 class="about-title">关于我们</h2>
+    <div class="about-content">
+      <p>我们是民大软件工程专业的学生，这个博客是我们的课程项目之一。</p>
+      <p>我们希望通过这个平台，分享校园生活、学习心得和技术成长。</p>
+=======
   <!-- 博客内容区 -->
   <div class="container">
     <div class="card">
@@ -125,13 +419,19 @@
     <div class="card">
       <h3>期末复习指南</h3>
       <p>整理了各科的复习重点和笔记，希望能帮到大家...</p>
+>>>>>>> main
     </div>
   </div>
 
   <!-- 页脚信息 -->
   <footer>
+<<<<<<< feature/deploy
+    <p class="footer-text">© 2026 民大校园博客 | All Rights Reserved</p>
+    <p class="footer-text"> Powered by Halo | 民大红色主题 v1.0</p>
+=======
     <p class="footer-text">© 2026 我的校园博客 | All Rights Reserved</p>
     <p class="footer-text"> Powered by Halo | 校园清新主题 v1.0</p>
+>>>>>>> main
   </footer>
 </body>
 </html>

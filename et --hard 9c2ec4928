@@ -1,0 +1,43 @@
+[33m42c88f1e8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/deploy[m[33m, [m[1;31morigin/feature/deploy[m[33m)[m HEAD@{0}: commit: docs: 更新搜索功能调研文档
+[33mae8914a19[m HEAD@{1}: commit: feat: 搜索无结果友好提示
+[33m6adeebb8e[m HEAD@{2}: commit: style: 阅读时间标签样式
+[33m84e7f210e[m HEAD@{3}: commit: feat: 文章卡片添加预计阅读时间标签
+[33m15fa5150a[m HEAD@{4}: reset: moving to HEAD~1
+[33m7db27856e[m HEAD@{5}: commit: feat: 文章卡片添加预计阅读时间标签
+[33m15fa5150a[m HEAD@{6}: reset: moving to HEAD~4
+[33m9c2ec4928[m HEAD@{7}: commit: docs: 更新搜索功能调研文档
+[33mcca2da31d[m HEAD@{8}: commit: feat: 文章卡片添加预计阅读时间标签
+[33ma56152ae4[m HEAD@{9}: reset: moving to HEAD~2
+[33m37833a8fc[m HEAD@{10}: commit: feat: 文章卡片添加预计阅读时间标签
+[33mecd6654e2[m HEAD@{11}: commit (merge): fix: 解决冲突，恢复5+6号作业完整代码
+[33ma56152ae4[m HEAD@{12}: checkout: moving from feature/deploy to feature/deploy
+[33ma56152ae4[m HEAD@{13}: reset: moving to HEAD
+[33ma56152ae4[m HEAD@{14}: commit: style: 搜索结果卡片样式优化
+[33m45c031cb3[m HEAD@{15}: commit: style: 搜索结果页关键词高亮
+[33m15fa5150a[m HEAD@{16}: commit: docs: 搜索功能初步测试记录
+[33me7d71c561[m HEAD@{17}: commit: feat: 配置Halo内置全文搜索
+[33m7764973dd[m HEAD@{18}: commit: fix: 搜索框调整到导航栏右侧
+[33m407c2735f[m HEAD@{19}: commit: feat: 5号 - 搜索框聚焦动画+移动端适配完成
+[33m3b3006f35[m HEAD@{20}: commit: feat: 5号 - 搜索框样式优化完成
+[33m28517aefd[m HEAD@{21}: commit: feat: 5号 - 搜索框基础结构完成
+[33mda4b865aa[m HEAD@{22}: commit: feat:5号 - 搜索框基础结构
+[33m5778b2c1c[m HEAD@{23}: cherry-pick: feat:5号导航栏搜索框完成
+[33m18712ec59[m HEAD@{24}: checkout: moving from feature/ai-and-search to feature/deploy
+[33m5e970725d[m[33m ([m[1;32mfeature/ai-and-search[m[33m)[m HEAD@{25}: commit: feat:5号导航栏搜索框完成
+[33m18712ec59[m HEAD@{26}: pull origin feature/deploy: Fast-forward
+[33m9799a96f3[m HEAD@{27}: pull origin dev: Fast-forward
+[33m2561abccd[m[33m ([m[1;31morigin/feature/ai-and-search[m[33m)[m HEAD@{28}: checkout: moving from feature/ai-and-search to feature/ai-and-search
+[33m2561abccd[m[33m ([m[1;31morigin/feature/ai-and-search[m[33m)[m HEAD@{29}: commit: feat:AI摘要接口初版框架
+[33m38de1bd16[m HEAD@{30}: checkout: moving from feature/ai-and-search to feature/ai-and-search
+[33m38de1bd16[m HEAD@{31}: checkout: moving from feature/ai-and-search to feature/ai-and-search
+[33m38de1bd16[m HEAD@{32}: commit: docs:记录Halo后端代码结构分析
+[33maf2aad716[m HEAD@{33}: checkout: moving from feature/ai-and-search to feature/ai-and-search
+[33maf2aad716[m HEAD@{34}: checkout: moving from feature/ai-and-search to feature/ai-and-search
+[33maf2aad716[m HEAD@{35}: commit: feat:新增DeepSeek API测试脚本
+[33mac53528ef[m HEAD@{36}: checkout: moving from dev to feature/ai-and-search
+[33m58c04c444[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mdev[m[33m)[m HEAD@{37}: checkout: moving from feature/ai-and-search to dev
+[33mac53528ef[m HEAD@{38}: commit: docs:调研DeepSeek API接口文档
+[33m58c04c444[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mdev[m[33m)[m HEAD@{39}: checkout: moving from feature/ai-and-search to feature/ai-and-search
+[33m58c04c444[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mdev[m[33m)[m HEAD@{40}: checkout: moving from dev to feature/ai-and-search
+[33m58c04c444[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mdev[m[33m)[m HEAD@{41}: checkout: moving from main to dev
+[33m58c04c444[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mdev[m[33m)[m HEAD@{42}: clone: from https://github.com/well-cy/halo-blog.git

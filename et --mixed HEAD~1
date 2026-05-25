@@ -1,0 +1,109 @@
+[33m7db27856e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/deploy[m[33m, [m[1;31morigin/feature/deploy[m[33m)[m feat: 文章卡片添加预计阅读时间标签
+[33m15fa5150a[m docs: 搜索功能初步测试记录
+[33me7d71c561[m feat: 配置Halo内置全文搜索
+[33m7764973dd[m fix: 搜索框调整到导航栏右侧
+[33m407c2735f[m feat: 5号 - 搜索框聚焦动画+移动端适配完成
+[33m3b3006f35[m feat: 5号 - 搜索框样式优化完成
+[33m28517aefd[m feat: 5号 - 搜索框基础结构完成
+[33mda4b865aa[m feat:5号 - 搜索框基础结构
+[33m5778b2c1c[m feat:5号导航栏搜索框完成
+[33m18712ec59[m fix: 修复注入代码文件内容为空
+[33m50e843030[m feat: 5月8日 统一托管自定义样式代码
+[33m9799a96f3[m Merge pull request #11 from well-cy/feature/like-and-progress
+[33md7ff82d87[m Merge pull request #12 from well-cy/dev
+[33m36079b4a7[m Merge pull request #13 from well-cy/feature/deploy
+[33m865f14c3f[m style: 统一校园砖红色主题配色
+[33mb523fdf67[m feat: 阅读进度条滚动跟随效果
+[33mc564f4e12[m feat: 文章顶部添加阅读进度条
+[33m37ac19136[m style: 点赞按钮爱心弹跳动画
+[33mbbd87d4b7[m Merge pull request #10 from well-cy/feature/deploy
+[33mf627702b3[m Merge branch 'main' into feature/deploy
+[33mb234769d0[m Merge pull request #6 from well-cy/feature/theme-and-docs
+[33m361daed62[m style: 清理默认导航菜单
+[33macbfeb952[m Upgrade Gradle wrapper to 9.5.0 (#9939)
+[33m86584aab9[m fix: register missing extension point definitions (#9935)
+[33m08a041843[m Merge pull request #9 from well-cy/feature/ai-and-search
+[33m2561abccd[m[33m ([m[1;31morigin/feature/ai-and-search[m[33m)[m feat:AI摘要接口初版框架
+[33m38de1bd16[m docs:记录Halo后端代码结构分析
+[33m71c6b8abf[m style: 修改网站Logo和页脚信息
+[33m725a5d73c[m Merge pull request #5 from well-cy/feature/ai-editor-and-interact
+[33m0fc41fecf[m style: 修改首页配色为校园清新风格
+[33m049333c41[m style: 点赞按钮基础样式
+[33m7ec3e3628[m feat: 文章底部添加点赞按钮
+[33m6eb71d45e[m style: 优化摘要卡片竖线和字体
+[33m9637b1e84[m style: AI摘要卡片添加渐变背景
+[33m876452340[m feat: 添加文章阅读进度条
+[33mdee7dc31f[m Remove deprecated Thumbnail and LocalThumbnail (#9934)
+[33m5335da2c1[m Fix random post retrieval to always return requested size (#9932)
+[33md13fbdd18[m Use WebClient instead of ReactiveUrlDataBufferFetcher for attachment upload from URL (#9931)
+[33m975b5294b[m Refactor remember-me token handling with rotation and grace period, and update static resource path patterns (#9928)
+[33mc9d82e7c3[m docs: 更新操作日志，记录04-29页面优化工作
+[33m03a74f79f[m docs: 添加操作日志，记录04-29页面配置工作
+[33m38c96fb43[m Merge pull request #3 from well-cy/feature/deploy
+[33mb1da899cd[m feat: 添加文章分享复制链接功能
+[33mef48a668b[m t push origin dev Merge branch 'dev' of https://github.com/well-cy/halo-blog into dev
+[33mbbf47825d[m style: 优化评论区样式，添加圆角和配色
+[33m7525d792e[m Merge pull request #1 from well-cy/feature/ai-editor-and-interact
+[33m84842c507[m Bump plugin preset versions and update theme (#9930)
+[33mecc3e6d5a[m Merge pull request #2 from well-cy/feature/ai-and-search
+[33maf2aad716[m feat:新增DeepSeek API测试脚本
+[33m02d22055c[m style: AI摘要卡片样式完成
+[33m16d7cb0c5[m feat: 文章详情页添加AI摘要卡片静态结构
+[33m6533fe8a6[m docs: 添加用户注册登录测试记录
+[33m7b4f9fc7e[m docs: 新增Halo主题文件结构分析文档
+[33mac53528ef[m docs:调研DeepSeek API接口文档
+[33m5b75b8f8f[m docs: 分析Halo前端代码结构
+[33mc974f6435[m docs: Update contributing guide with contributor agreement (#9924)
+[33mb22e2d378[m docs: 添加服务器操作日志
+[33m3cb815a6b[m docs: 更新部署文档，添加Nginx反向代理配置
+[33mf14be1c12[m docs: 完善README.md，补充项目简介、成员分工与访问地址
+[33m19eb1e30d[m Add device resolution regex configuration and update test expectations (#9921)
+[33m010198fa0[m docs: 添加服务器部署文档
+[33m1214e2d91[m Upgrade Spring Boot to 4.1.0-RC1 (#9919)
+[33m1bf370551[m Fix the problem of not being able to remember me (#9920)
+[33me4834c386[m Make MenuItem Link Updates Event-Driven Instead of Polling (#9915)
+[33m7b0d554de[m Add random post retrieval method to PostFinder (#9918)
+[33m3fef74208[m fix: validate UC attachment remote URLs (#9904)
+[33md990be362[m Replace @iconify/json with specific icon packs (#9914)
+[33m3dfea51da[m Avoid appending version to assets directories (#9897)
+[33m58c04c444[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mdev[m[33m)[m 将空安全注解迁移到 JSpecify 标准 (#9888)
+[33m326e61d04[m Ensure remember-me token is removed after device revocation and improve device resolution logic (#9899)
+[33m0f2cdaf07[m Build UI packages before publishing (#9895)
+[33m82614b322[m pref: additional file type restrictions for uploading avatars (#9892)
+[33m4d29a0b1d[m Refactor theme reloading mechanism to support extension updates and add reload annotation (#9894)
+[33m5acbdf60a[m feat: require TOTP code verification for 2FA enable/disable/reconfigure operations (#9857)
+[33mb08b532ec[m Refactor login parameter caching to use a generalized request cache (#9893)
+[33me75b1f748[m Add outline-0 to form element styles (#9891)
+[33m50960798c[m Maintain input order in categoryFinder.getByNames and tagFinder.getByNames (#9882)
+[33m86dfbd814[m Use URL API to build attachment absolute permalinks (#9885)
+[33m270b53964[m Add themes/upgrade to role-template-manage-themes permissions (#9887)
+[33m69ab58fac[m Refactor user connection retrieval and deletion with new methods for provider user ID operations (#9880)
+[33m4f73a5c41[m Simplify attachment thumbnails handling and make thumbnails nullable (#9878)
+[33mc62665301[m Fix issue where owner cannot be set when creating a post (#9862)
+[33mf4d87b617[m Support role selection when creating personal tokens (#9842)
+[33m6ddf369c0[m Support plugin operations on plugin detail page (#9867)
+[33me96bea44d[m Add plugin reload action (#9865)
+[33mae634a133[m Bump GitHub Actions versions and tidy workflows (#9863)
+[33mc2b3ad887[m Fix position icon display for figure type in editor (#9852)
+[33m2515b3f2b[m Add support for binding same user with multiple social accounts (#9859)
+[33md2b23fb7e[m Fix "Finder with name 'xxx' is already registered" on plugin re-registration (#9853)
+[33m79a7bcf7d[m feat: version theme static resources URLs for cache busting on upgrade (#9854)
+[33m0829b7e5e[m Fix missing `name` variable in category and author detail page template models (#9850)
+[33mc4237cf3c[m Bump tiptap to 3.22.2 and update UI deps (#9849)
+[33m7fff88eb9[m feature: support menu clone (#8417)
+[33m288f64475[m Bump version to 2.24.0 (#9841)
+[33mb6112b33d[m Upgrade to Spring Boot 4.0.5 (#9840)
+[33m86076a15f[m Implement JWT authentication with PAT token exclusion and refactor related classes (#9799)
+[33mfe475a87e[m pref: prompt when configuration is not saved (#9800)
+[33me6ec3dbe0[m Bump vite-plus version to fix lint-staged error (#9839)
+[33me7348876d[m Remove default value for visibility in API schemas and related classes (#9801)
+[33mce315893b[m Update Docker image version to 2.23 (#8503)
+[33ma3cf3b6eb[m Add description of Halo in README (#8502)
+[33m2e8f9e8c3[m Bind edit dropdown to container and keep it open (#8497)
+[33m97185c48b[m Update pnpm lock: bump vite-plus to 0.1.14 (#8498)
+[33m2c371a435[m Use group/item for hover scopes in ToggleInput (#8487)
+[33m361fad9aa[m fix: resolve the issue of rendering errors when the array value is undefined (#8495)
+[33m998d30582[m docs: update format of README.md (#8492)
+[33md4e1f9cab[m docs: Enhance README with Halo version comparison (#8490)
+[33mfbfa28032[m Fix: Add missing `_templateId` to tag detail page model (#8485)
+[33m1057260ed[m Bump vite-plus
