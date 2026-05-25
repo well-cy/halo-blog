@@ -96,7 +96,7 @@ header,
     border-bottom: none !important;
 }
 
-/* 导航栏文字白色 */
+/* 导航栏文字白色（默认） */
 header a,
 .site-header a,
 .header a,
@@ -539,6 +539,18 @@ header a,
 #article-content-wrap {
   scroll-margin-top: 80px;
 }
+
+/* 隐藏登录页Halo Logo */
+.login-logo, .auth-logo img, 
+[class*="login"] img,
+[class*="auth"] img {
+  display: none !important;
+}
+
+/* ========== 任务2：隐藏分类介绍文字 ========== */
+.category-intro {
+  display: none !important;
+}
 </style>
 
 <!-- 搜索框 -->
@@ -557,8 +569,8 @@ header a,
 <button id="float-write-btn" onclick="location.href='/console/posts/editor'">✏️</button>
 
 <div id="top-notice-bar">
-  📢 校园博客观迎你！分享学习、生活、趣事都可以投稿～
-  <span id="close-notice" onclick="document.getElementById('top-notice-bar').style.display='none'">×</span>
+  📢 民大校园生活圈欢迎你！分享学习、生活、趣事都可以投稿～
+  <span id="close-notice" onclick="this.parentElement.style.display='none'">×</span>
 </div>
 
 <!-- 分类介绍文字（固定在顶部，强制可见） -->
@@ -670,7 +682,7 @@ document.addEventListener('DOMContentLoaded', function() {
       searchModal.style.display = 'none';
     }
   });
-});
+}
 
 // 5. 阅读时间功能
 document.addEventListener('DOMContentLoaded', function() {
@@ -876,7 +888,6 @@ img[alt*="Halo"],
 img[alt*="halo"] {
   display: none !important;
 }
-</style>
 
 <style>
 /* 强制替换用户中心左上角Halo Logo */
